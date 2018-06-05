@@ -4,15 +4,49 @@
       <slot name="topbar" />
     </div>
     <div class="main">
-      <div class="inner">
-        <slot />
+      <div class="banner">
+        <slot name="banner" />
       </div>
-      <div class="sidebar">
-        <slot name="sidebar" />
+      <div class="container">
+        <div class="content">
+          <slot />
+        </div>
+        <div class="sidebar">
+          <slot name="sidebar" />
+        </div>
       </div>
+      <div class="clearfix"></div>
     </div>
     <div class="footer">
       <slot name="footer" />
     </div>
   </div>
 </template>
+<style lang="less" scoped>
+@import "~@/assets/style/var";
+.layout {
+  width: 100%;
+  height: auto;
+}
+.topbar {
+  height: 100px;
+  background: @mainBg;
+}
+.main {
+  width: 100%;
+}
+.content {
+  width: 680px;
+  margin-right: 40px;
+  float: left;
+}
+.sidebar {
+  width: 480px;
+  float: right;
+}
+.footer {
+  margin-top: 60px;
+}
+
+</style>
+

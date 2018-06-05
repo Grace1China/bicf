@@ -1,9 +1,15 @@
 <template>
   <layout>
     <topbar slot="topbar" />
-    <banner />
-    <list />
-    <sidebar slot="sidebar" />
+    <banner slot="banner" />
+    <block title="币市头条">
+      <list />
+    </block>
+    <sidebar slot="sidebar">
+      <hot-key />
+      <hot-news />
+      <daily-coin />
+    </sidebar>
     <footerBar slot="footer" />
   </layout>
 </template>
@@ -12,11 +18,20 @@
 import banner from './banner'
 import list from './list'
 
+import HotKey from '@/components/aside/hotkey'
+import HotNews from '@/components/aside/hotNews'
+import dailyCoin from '@/components/aside/dailyCoin'
+
 export default {
   name: "home",
   components: {
     banner,
     list,
+
+    HotKey,
+    HotNews,
+    dailyCoin,
+
   }
 }
 </script>

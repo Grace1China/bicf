@@ -1,11 +1,31 @@
 <template>
-  <div>
-    <v-line 
-      :data="chartData"
-      :grid="chartGrid"
-      :yAxis="yAxis"
-      :xAxis="xAxis"
-    />
+  <div class="banner">
+    <div class="container">
+      <div class="banner-canvas">
+        <v-line 
+          :data="chartData"
+          :grid="chartGrid"
+          :yAxis="yAxis"
+          :xAxis="xAxis"
+          width="1200px"
+          height="300px"
+        />
+      </div>
+      <div class="banner-data">
+        <div class="item">
+          <h2>33%</h2>
+          <p>A series of data reports</p>
+        </div>
+        <div class="item">
+          <h2>22%</h2>
+          <p>data reports</p>
+        </div>
+        <div class="item">
+          <h2>11%</h2>
+          <p>data reports</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -45,3 +65,31 @@ export default {
   },
 }
 </script>
+<style lang="less" scoped>
+@import "~@/assets/style/var";
+.banner {
+  height: 300px;
+  width: 100%;
+  background: @mainBg;
+  position: relative;
+}
+.banner-canvas {
+  position: absolute;
+  z-index: 0;
+}
+.banner-data {
+  float: right;
+  text-align: right;
+  z-index: 10;
+  .item {
+    color: #fff;
+    h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+}
+</style>
+
