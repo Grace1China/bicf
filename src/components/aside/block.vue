@@ -37,7 +37,6 @@ export default {
   line-height: 20px;
   font-size: 20px;
   padding-bottom: 25px;
-  margin-top: 25px;
   h3 {
     font-size: 20px;
     margin: 0;

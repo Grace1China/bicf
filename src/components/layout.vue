@@ -39,10 +39,12 @@
   width: 680px;
   margin-right: 40px;
   float: left;
+  margin-top: 30px;
 }
 .sidebar {
   width: 480px;
   float: right;
+  margin-top: 30px;
 }
 .footer {
   margin-top: 60px;
