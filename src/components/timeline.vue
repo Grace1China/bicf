@@ -6,10 +6,10 @@
       <div class="direction-r">
         <div class="flag-wrapper">
           <span class="time-wrapper">
-            2018-05-01
+            <span class="text">2018-05-01</span>
             <span class="line"></span>
           </span>
-          <span class="flag">EOS发布测试</span>
+          <span class="flag">EOS发布测试, EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试EOS发布测试</span>
         </div>
       </div>
     </li>
@@ -23,12 +23,13 @@
   width: 660px;
   margin: 0;
   padding: 0;
+  padding-left: 20px;
   list-style-type: none;
 }
 
 .timeline:before {
   position: absolute;
-  left: 140px;
+  left: 186px;
   top: 0;
   content: " ";
   display: block;
@@ -54,7 +55,6 @@
 
 .direction-r {
   position: relative;
-  width: 300px;
   float: left;
 }
 
@@ -69,22 +69,22 @@
   position: relative;
   display: inline-block;
   background: #85A5FF;
-  padding: 0 15px;
+  padding: 10px 15px;
   border-radius: 5px;
 
   text-align: left;
-  height: 50px;
-  line-height: 50px;
+  line-height: 30px;
 
 
   color: #fff;
 
   float: right;
+  max-width: 420px;
 }
 
 .direction-r .flag:before {
   position: absolute;
-  top: 50%;
+  top: 30px;
   right: -40px;
   content: " ";
   display: block;
@@ -105,7 +105,7 @@
   content: "";
   position: absolute;
   right: 100%;
-  top: 50%;
+  top: 25px;
   height: 0;
   width: 0;
   margin-top: -8px;
@@ -126,6 +126,10 @@
   float: left;
   height: 50px;
   line-height: 50px;
+  .text {
+    display: inline-block;
+    width: 120px;
+  }
 
   .line {
     background: rgba(133,165,255,1);
@@ -134,7 +138,7 @@
     display: inline-block;
     position: relative;
     top: -5px;
-    margin-left: 20px;
+    // margin-left: 20px;
     margin-right: 50px;
   }
 }
