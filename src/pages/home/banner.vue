@@ -40,7 +40,12 @@ export default {
     this.$chart = echarts.init(this.$refs.canvas);
     const option = {
       tooltip: {},
-
+      grid: {
+        left: '40',
+        // top: 0,
+        // right: 0,
+        // bottom: 0,
+      },
       xAxis: {
         show: false,
         data: [1,2,3,4,5,6]
@@ -135,7 +140,7 @@ export default {
   z-index: 100;
 }
 .gradual-l {
-  left: 180px;
+  left: 90px;
 
 }
 .gradual-r {
