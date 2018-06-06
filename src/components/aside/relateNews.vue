@@ -3,7 +3,7 @@
     title="相关新闻"
   >
     <div class="hot-news">
-      <news-item v-for="i in 15"
+      <news-item v-for="i in 10"
         :key="i"
         title="建设银行舟山分行创新服务浙江自贸区建设小计"
         location="人民网"

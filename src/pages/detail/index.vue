@@ -5,9 +5,9 @@
       <Content />
       <time-line />
     </div>
-    </block>
     <sidebar slot="sidebar">
       <relate-news />
+      <relate-obj />
     </sidebar>
     <footerBar slot="footer" />
   </layout>
@@ -17,6 +17,7 @@
 import relateNews from '@/components/aside/relateNews'
 import TimeLine from './timeline'
 import Content from './content'
+import RelateObj from './relateObj'
 
 export default {
   name: "detail",
@@ -24,6 +25,7 @@ export default {
     Content,
     relateNews,
     TimeLine,
+    RelateObj,
   }
 }
 </script>
