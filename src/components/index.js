@@ -5,7 +5,7 @@ import AsideBlock from './aside/block'
 import Topbar from './topbar'
 import Footer from './footer'
 import Layout from './layout'
-import Icon from './icon'
+import Icon from './Icon'
 
 Vue.component('sidebar', Aside)
 Vue.component('block', AsideBlock)
