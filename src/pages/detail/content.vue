@@ -15,7 +15,7 @@
         </div>
         <div class="meta-item" v-if="tags.length">
           <icon type="tag" />
-          {{tags}}
+          {{tags.join(', ')}}
         </div>
         <div class="clearfix"></div>
       </div>

@@ -1,31 +1,33 @@
 <template>
   <div class="news-item">
-    <div class="thumbnail">
-      <img :src="imgUrl" :alt="title">
-    </div>
-    <div class="info">
-      <h1 v-if="title">{{title}}</h1>
-      <p v-if="description" class="description" v-html="description"></p>
-      <div class="meta">
-        <div class="meta-item" v-if="location">
-          <icon type="location" />
-          {{location}}
-        </div>
-        <div class="meta-item" v-if="time">
-          <icon type="clock" />
-          {{time}}
-        </div>
-        <div class="meta-item" v-if="spread">
-          <icon type="notify" />
-          传播度({{spread}})
-        </div>
-        <div class="meta-item" v-if="tags.length">
-          <icon type="tag" />
-          {{tags.map(i => i)}}
+    <router-link :to="'/post/1'">
+      <div class="thumbnail">
+        <img :src="imgUrl" :alt="title">
+      </div>
+      <div class="info">
+        <h1 v-if="title">{{title}}</h1>
+        <p v-if="description" class="description" v-html="description"></p>
+        <div class="meta">
+          <div class="meta-item" v-if="location">
+            <icon type="location" />
+            {{location}}
+          </div>
+          <div class="meta-item" v-if="time">
+            <icon type="clock" />
+            {{time}}
+          </div>
+          <div class="meta-item" v-if="spread">
+            <icon type="notify" />
+            传播度({{spread}})
+          </div>
+          <div class="meta-item" v-if="tags.length">
+            <icon type="tag" />
+            {{tags.join(', ')}}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="clearfix"></div>
+      <div class="clearfix"></div>
+    </router-link>
   </div>
 </template>
 <script>

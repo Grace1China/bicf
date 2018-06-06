@@ -1,9 +1,9 @@
 <template>
 <div class="navbar">
   <ul>
-    <li class="active"><a href="#">首页</a></li>
-    <li><a href="#">二级页面1</a></li>
-    <li><a href="#">二级页面2</a></li>
+    <li class="active"><router-link to="/">首页</router-link></li>
+    <li><router-link to="/post/1">二级页面1</router-link></li>
+    <li><router-link to="/">二级页面2</router-link></li>
   </ul>
 </div>
 </template>
