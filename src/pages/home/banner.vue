@@ -7,7 +7,7 @@
         </div>
         <div class="gradual-r"></div>
       <div class="banner-data">
-        <div class="item">
+        <div class="item active">
           <h2>33%</h2>
           <p>A series of data reports</p>
         </div>
@@ -61,30 +61,43 @@ export default {
       },
       series: [
         {
-          name: "销量",
+          name: "Data Display",
           type: "line",
           data: [5, 20, 36, 10, 10, 20],
           smooth: true,
           lineStyle: {
-            width: 15
+            width: 15,
+            color: '#F000BC',
+          },
+          itemStyle: {
+            color: '#F000BC',
           }
         },
         {
-          name: "销量1",
+          name: "Data Display2",
           type: "line",
           data: [9, 30, 26, 20, 30, 10],
           smooth: true,
           lineStyle: {
-            width: 15
+            width: 15,
+            color: '#FFC900',
+          },
+          itemStyle: {
+            color: '#FFC900',
           }
         },
         {
-          name: "销量2",
+          name: "Data Display3",
           type: "line",
           data: [1, 10, 30, 19, 15, 20],
           smooth: true,
           lineStyle: {
-            width: 15
+            width: 12,
+            color: '#7EC5FF',
+            opacity: '0.8'
+          },
+          itemStyle: {
+            color: '#7EC5FF',
           }
         }
       ]
@@ -135,11 +148,24 @@ export default {
   z-index: 10;
   .item {
     color: #fff;
+    margin-bottom: 31px;
     h2 {
       font-size: 24px;
+      margin: 4px 0;
     }
     p {
+      display: inline-block;
       font-size: 16px;
+      margin: 0;
+      padding-bottom: 10px;
+      border-bottom: @mainBg solid 1px;
+      color: #7EC5FF;
+    }
+    &:hover,&.active {
+      p {
+        color: #fff;
+        border-bottom-color: #fff;
+      }
     }
   }
 }

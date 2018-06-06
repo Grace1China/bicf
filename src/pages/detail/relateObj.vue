@@ -13,5 +13,17 @@
 .relate-obj {
   border-radius: 10px;
   border: 1px solid rgba(230, 230, 230, 1);
+  color: #4264FB;
+
+  ul {
+    li {
+      line-height: 50px;
+    }
+    a {
+      font-size: 14px;
+      color: #333333;
+      text-decoration: none;
+    }
+  }
 }
 </style>
