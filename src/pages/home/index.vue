@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
 import banner from './banner'
 import list from './list'
 
@@ -32,6 +33,12 @@ export default {
     HotNews,
     dailyCoin,
 
+  },
+  mounted() {
+    this.$store.dispatch('getBanner')
+    this.$store.dispatch('getHotkeys')
+    this.$store.dispatch('getHotnews')
+    this.$store.dispatch('getDailycoin')
   }
 }
 </script>

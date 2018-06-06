@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "echarts": "^4.1.0",
     "es6-promise": "^4.2.4",
     "less": "^3.0.4",
