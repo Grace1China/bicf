@@ -1,12 +1,22 @@
 <template>
 <div class="navbar">
   <ul>
-    <li class="active"><router-link to="/">首页</router-link></li>
-    <li><router-link to="/post/1">二级页面1</router-link></li>
-    <li><router-link to="/">二级页面2</router-link></li>
+    <li v-for="(item, index) in navbar.list" :key="index" :class="navbar.active == index ? 'active' : ''"><router-link :to="item.link">{{item.text}}</router-link></li>
   </ul>
 </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState({
+      navbar: state => state.common.navbar
+    })
+  }
+}
+</script>
+
 <style lang="less" scoped>
 .navbar {
   float: left;

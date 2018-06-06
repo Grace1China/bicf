@@ -41,7 +41,7 @@ export default {
     spread: String,
     tags: {
       type: Array,
-      default: []
+      default: () => []
     },
   }
 }

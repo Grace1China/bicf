@@ -2,32 +2,31 @@
   <div class="footer">
     <div class="container">
       <div class="logo">
-        <a href="#">
+        <router-link to="/">
           <img src="http://via.placeholder.com/112x36" alt="">
-        </a>
+        </router-link>
       </div>
       <div class="footer-navbar">
         <ul>
-          <li>
-            <a href="#">关于我们</a>
-          </li>
-          <li>
-            <a href="#">服务条款</a>
-          </li>
-          <li>
-            <a href="#">联系我们</a>
-          </li>
-          <li>
-            <a href="#">投稿须知</a>
-          </li>
-          <li>
-            <a href="#">反馈意见</a>
+          <li v-for="(item, index) in footer" :key="index">
+            <router-link :to="item.link">{{item.text}}</router-link>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState({
+      footer: state => state.common.footer
+    })
+  }
+}
+</script>
 <style lang="less" scoped>
 .footer {
   background:rgba(239,239,239,1);

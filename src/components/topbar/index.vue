@@ -2,9 +2,9 @@
   <div id="topbar">
     <div class="container">
       <div class="logo">
-        <a href="#">
+        <router-link to="/">
           <img src="http://via.placeholder.com/112x36" alt="">
-        </a>
+        </router-link>
       </div>
       <navbar />
       <div class="search">
