@@ -10,7 +10,7 @@
         <div class="meta">
           <div class="meta-item" v-if="location">
             <icon type="location" />
-            {{location}}
+            <a target="_blank" :href="locationLink || 'javascript:'" @click.stop.capture="false">{{location}}</a>
           </div>
           <div class="meta-item" v-if="time">
             <icon type="clock" />
@@ -41,6 +41,7 @@ export default {
     imgUrl: String,
     description: String,
     location: String,
+    locationLink: String,
     time: String,
     spread: [String, Number],
     tags: {
@@ -93,6 +94,10 @@ export default {
         font-size: 12px;
         margin-right: 15px;
         color:rgba(34,34,34,1);
+        a {
+          color:rgba(34,34,34,1);
+          text-decoration: none;
+        }
         :global(.iconfont) {
           margin-right: 5px;
           color: #597EF7;

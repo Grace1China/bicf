@@ -56,7 +56,7 @@ export default {
     if(this.currentHeight < this.maxHeight) {
       this.showAll = true
     }
-    console.log(this.currentHeight)
+    // console.log(this.currentHeight)
   },
   methods: {
     showAllHandler() {

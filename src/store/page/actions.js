@@ -45,8 +45,14 @@ export const getRelateNews = ({commit}, id) => request.get(`${APIHOST}/api/news/
   })
 })
 
-// export const getRelateNews = ({commit}, id) => request.get(`${APIHOST}/api/news/${id}/similarity_news`).then(res => {
-//   commit('setDetail', {
-//     post: res.data.data,
-//   })
-// })
+export const getRelateObj = ({commit}, id) => request.get(`${APIHOST}/api/news/${id}/related_event`).then(res => {
+  commit('setDetail', {
+    relateobj: res.data.data,
+  })
+})
+
+export const getTimeLine = ({commit}, id) => request.get(`${APIHOST}/api/news/${id}/time_line`).then(res => {
+  commit('setDetail', {
+    timeline: res.data.data,
+  })
+})

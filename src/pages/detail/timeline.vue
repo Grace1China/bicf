@@ -4,16 +4,22 @@
       时间线
     </div>
     <div class="timeline-detail">
-      <time-line />
+      <time-line :list="list" />
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import TimeLine from "@/components/timeline";
 
 export default {
   components: {
     TimeLine
+  },
+  computed: {
+    ...mapState({
+      list: state => state.page.detail.timeline
+    })
   }
 };
 </script>

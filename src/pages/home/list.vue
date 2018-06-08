@@ -8,6 +8,7 @@
         :description="item.summary"
         :imgUrl="item.image"
         :location="item.media"
+        :locationLink="item.url"
         :time="item.ctime"
         :spread="item.propagation"
         :tags="item.keywords"
@@ -36,6 +37,16 @@ export default {
     }),
   },
   methods: {
+    checkLoad(e) {
+      if(this.loading) return
+      const { top } = this.$refs.loadMore && this.$refs.loadMore.getBoundingClientRect && this.$refs.loadMore.getBoundingClientRect()
+      // console.log( top - window.innerHeight)
+      const distence = top - window.innerHeight
+      if(distence < 1000) {
+        this.loading = true
+        this.loadData()
+      }
+    },
     loadData() {
       this.$store.dispatch('getNews', {
         page: this.page++,
@@ -49,17 +60,11 @@ export default {
     this.loadData()
     document.querySelector('html')
 
-    window.addEventListener('scroll', e => {
-      if(this.loading) return
-      const { top } = this.$refs.loadMore && this.$refs.loadMore.getBoundingClientRect && this.$refs.loadMore.getBoundingClientRect()
-      // console.log( top - window.innerHeight)
-      const distence = top - window.innerHeight
-      if(distence < 1000) {
-        this.loading = true
-        this.loadData()
-      }
-    })
+    window.addEventListener('scroll', this.checkLoad)
     window.dispatchEvent(new Event('scroll'))
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.checkLoad)
   }
 }
 </script>

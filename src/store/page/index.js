@@ -29,6 +29,12 @@ export default {
         state.detail[key] = data[key]
       }
     },
+    resetDetail(state) {
+      state.detail.post = {}
+      state.detail.relatenews = []
+      state.detail.relateobj = []
+      state.detail.timeline = []
+    }
   },
   actions,
 }
