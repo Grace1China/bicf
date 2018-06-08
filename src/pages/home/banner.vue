@@ -7,108 +7,113 @@
         </div>
         <div class="gradual-r"></div>
       <div class="banner-data">
-        <div class="item active">
-          <h2>33%</h2>
-          <p>A series of data reports</p>
-        </div>
-        <div class="item">
-          <h2>22%</h2>
-          <p>data reports</p>
-        </div>
-        <div class="item">
-          <h2>11%</h2>
-          <p>data reports</p>
+        <div v-for="(item, key) in list" :key="key" class="item active">
+          <h2>{{item[0].change_1h}}</h2>
+          <p>{{key}}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-// import VLine from 'v-charts/lib/line'
-// import 'v-charts/lib/style.css'
 import echarts from "echarts";
+import { mapState } from 'vuex'
 
 export default {
   name: "home-banner",
-  // components: {
-  //   VLine
-  // },
   data: () => ({
-    $chart: {}
+    $chart: {},
+    colors: ['#F000BC', '#FFC900', '#7EC5FF']
   }),
+  computed: {
+    ...mapState({
+      list: state => state.page.home.banner
+    }),
+    chartData() {
+      const data = this.list;
+      const option = {
+        tooltip: {
+          position: function (pos, params, dom, rect, size) {
+            // console.log(pos)
+            let [x, y] = pos
+            if(x > 600) {
+              x = x - dom.clientWidth
+            } 
+            return [x, y];
+          },
+        },
+        grid: {
+          left: '50',
+        },
+        xAxis: {
+          show: false,
+          data: []
+        },
+        yAxis: {
+          axisLine: { show: false },
+          splitLine: { show: false },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            fontSize: 16,
+            color: '#fff',
+          },
+          splitLine: {
+            show: false,
+          }
+        },
+        series: []
+       
+      };
+
+      const series = {
+        // name: "Data Display3",
+        type: "line",
+        // data: [1, 10, 30, 19, 15, 20],
+        smooth: true,
+        lineStyle: {
+          width: 12,
+          // color: '#7EC5FF',
+          opacity: '0.8'
+        },
+        itemStyle: {
+          // color: '#7EC5FF',
+        }
+      }
+
+      let index = 0
+      for(let key in data) {
+        const arr = data[key]
+        option.series.push({
+          ...series,
+          name: key,
+          lineStyle: {
+            ...series.lineStyle,
+            color: this.colors[index % this.colors.length],
+          },
+          itemStyle: {
+            ...series.itemStyle,
+            color: this.colors[index % this.colors.length]
+          },
+          data: arr.map(i => i.price)
+        })
+        option.xAxis.data = arr.map(i => i.time)
+        index++
+      }
+      return option;
+
+    },
+  },
   mounted() {
     this.$chart = echarts.init(this.$refs.canvas);
-    const option = {
-      tooltip: {},
-      grid: {
-        left: '40',
-        // top: 0,
-        // right: 0,
-        // bottom: 0,
-      },
-      xAxis: {
-        show: false,
-        data: [1,2,3,4,5,6]
-      },
-      yAxis: {
-        axisLine: { show: false },
-        splitLine: { show: false },
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          fontSize: 16,
-          color: '#fff',
-        },
-        splitLine: {
-          show: false,
-        }
-      },
-      series: [
-        {
-          name: "Data Display",
-          type: "line",
-          data: [5, 20, 36, 10, 10, 20],
-          smooth: true,
-          lineStyle: {
-            width: 15,
-            color: '#F000BC',
-          },
-          itemStyle: {
-            color: '#F000BC',
-          }
-        },
-        {
-          name: "Data Display2",
-          type: "line",
-          data: [9, 30, 26, 20, 30, 10],
-          smooth: true,
-          lineStyle: {
-            width: 15,
-            color: '#FFC900',
-          },
-          itemStyle: {
-            color: '#FFC900',
-          }
-        },
-        {
-          name: "Data Display3",
-          type: "line",
-          data: [1, 10, 30, 19, 15, 20],
-          smooth: true,
-          lineStyle: {
-            width: 12,
-            color: '#7EC5FF',
-            opacity: '0.8'
-          },
-          itemStyle: {
-            color: '#7EC5FF',
-          }
-        }
-      ]
-    };
-    this.$chart.setOption(option);
+    this.$chart.setOption(this.chartData);
   },
+  watch: {
+    list(val) {
+      this.$chart.setOption(this.chartData);
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -144,13 +149,14 @@ export default {
 
 }
 .gradual-r {
-  right: 180px;
+  right: 160px;
   transform: rotate(180deg);
 }
 .banner-data {
   float: right;
   text-align: right;
   z-index: 10;
+  margin-top: 60px;
   .item {
     color: #fff;
     margin-bottom: 31px;

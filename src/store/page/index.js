@@ -1,7 +1,5 @@
 import * as actions from './actions'
 
-console.log(actions)
-
 export default {
   state: {
     home: {
@@ -9,7 +7,9 @@ export default {
       hotnews: [],
       dailycoin: [],
       banner: {},
-      news: []
+      news: {
+        list: [],
+      }
     },
     detail: {
       post: {},
@@ -19,11 +19,16 @@ export default {
     }
   },
   mutations: {
-    setState(state, data) {
-      for(let key of data) {
-        state[key] = data[key]
+    setHome(state, data) {
+      for(let key in data) {
+        state.home[key] = data[key]
       }
-    }
+    },
+    setDetail(state, data) {
+      for(let key in data) {
+        state.detail[key] = data[key]
+      }
+    },
   },
   actions,
 }

@@ -26,6 +26,13 @@ export default {
     relateNews,
     TimeLine,
     RelateObj,
+  },
+  mounted() {
+    // this.$store.commit('setDetail', { post: {}})
+    document.getElementsByTagName('html').item(0).scrollTop = 0
+    console.log(this.$route)
+    this.$store.dispatch('getDetail', this.$route.params.id)
+    this.$store.dispatch('getRelateNews', this.$route.params.id)
   }
 }
 </script>

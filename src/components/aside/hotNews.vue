@@ -3,21 +3,28 @@
     title="热点新闻"
   >
     <div class="hot-news">
-      <news-item v-for="i in 15"
-        :key="i"
-        title="建设银行舟山分行创新服务浙江自贸区建设小计"
-        :imgUrl="'http://via.placeholder.com/350x350?text=' + i"
+      <news-item v-for="(item, index) in list"
+        :key="index"
+        :link="'/post/' + item.news_id"
+        :title="item.title"
+        :imgUrl="item.image"
       />
     </div>
   </block>
 </template>
 <script>
 import NewsItem from '@/components/newsItem'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     NewsItem
-  }
+  },
+  computed: {
+    ...mapState({
+      list: state => state.page.home.hotnews
+    })
+  },
 }
 </script>
 

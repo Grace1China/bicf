@@ -1,25 +1,65 @@
 <template>
   <div class="list news-list">
     <div class="list-container">
-      <news-item v-for="i in 15"
+      <news-item v-for="(item ,i) in news.list"
         :key="i"
-        title="建设银行舟山分行创新服务浙江自贸区建设小计"
-        description="建设银行舟山分行创新服务浙江自贸区建设小计建设银行舟山分行创新服务浙江自贸区建设小计建设银行舟山分行创新服务浙江自贸区建设小计建设银行舟山分行创新服务浙江自贸区建设小计"
-        :imgUrl="'http://via.placeholder.com/350x350?text=' + i"
-        location="光明网"
-        time="2018-05-23 13:58:23"
-        spread="12"
-        :tags="['中国', '服务', '发展', '探索']"
+        :link="'/post/' + item.id"
+        :title="item.title"
+        :description="item.summary"
+        :imgUrl="item.image"
+        :location="item.media"
+        :time="item.ctime"
+        :spread="item.propagation"
+        :tags="item.keywords"
       />
+      <div ref="loadMore"></div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import NewsItem from '@/components/newsItem'
 
 export default {
+  data() {
+    return {
+      loading: false,
+      page: 1
+    }
+  },
   components: {
     NewsItem
+  },
+  computed: {
+    ...mapState({
+      news: state => state.page.home.news
+    }),
+  },
+  methods: {
+    loadData() {
+      this.$store.dispatch('getNews', {
+        page: this.page++,
+        limit: 15,
+      }).then(() => {
+        this.loading = false
+      })
+    },
+  },
+  mounted() {
+    this.loadData()
+    document.querySelector('html')
+
+    window.addEventListener('scroll', e => {
+      if(this.loading) return
+      const { top } = this.$refs.loadMore.getBoundingClientRect()
+      // console.log( top - window.innerHeight)
+      const distence = top - window.innerHeight
+      if(distence < 1000) {
+        this.loading = true
+        this.loadData()
+      }
+    })
+    window.dispatchEvent(new Event('scroll'))
   }
 }
 </script>

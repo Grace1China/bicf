@@ -1,6 +1,6 @@
 <template>
   <div class="news-item">
-    <router-link :to="'/post/1'">
+    <router-link :to="link">
       <div class="thumbnail">
         <img :src="imgUrl" :alt="title">
       </div>
@@ -34,11 +34,15 @@
 export default {
   props: {
     title: String,
+    link: {
+      type: String,
+      default: '/'
+    },
     imgUrl: String,
     description: String,
     location: String,
     time: String,
-    spread: String,
+    spread: [String, Number],
     tags: {
       type: Array,
       default: () => []

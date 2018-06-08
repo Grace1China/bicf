@@ -4,12 +4,13 @@
   >
     <div class="tag-list">
       <div class="inner">
-        <a href="#" v-for="(item, index) of list" :key="index" :style="{backgroundColor: colors[parseInt(Math.random() * colors.length)]}">{{item}}</a>
+        <a href="javascrit:" v-for="(item, index) of list" :key="index" :style="{backgroundColor: colors[Math.abs(index % colors.length)]}">{{item.keyword}}</a>
       </div>
     </div>
   </block>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   data: () => ({
     colors: [
@@ -26,19 +27,13 @@ export default {
       '#FF6666',
       '#FF6699',
     ],
-    list: [
-      '区块链',
-      '比特币',
-      '公司',
-      '火币',
-      '交易',
-      '区块链',
-      '公司',
-      '火币',
-      '交易',
-      '区块链',
-    ]
-  })
+  }),
+  computed: {
+    ...mapState({
+      list: state => state.page.home.hotkeys
+    })
+  },
+
 }
 </script>
 <style lang="less" scoped>

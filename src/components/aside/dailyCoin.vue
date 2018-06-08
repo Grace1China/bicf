@@ -8,7 +8,7 @@
         <div class="col">
           币种
           <br/>
-          <span>市场容量</span>
+          <span>市值</span>
         </div>
         <div class="col">
           价格
@@ -20,60 +20,34 @@
         </div>
       </div>
       <div class="tbody">
-        <div v-for="i in 20" :key="i" class="row item">
+        <div v-for="(item, i) in list" :key="i" class="row item">
           <div class="col">
-            Bitcoin
+            {{item.name}}
             <br />
-            <span>$1296.83亿</span>
+            <span>${{item.marketcap}}</span>
           </div>
           <div class="col">
-            $7610.88
+            ${{item.price}}
             <br />
-            <span>$64.83亿</span>
+            <span>${{item.volume_24h}}</span>
           </div>
           <div class="col">
-            <div class="btn" :class="parseInt(Math.random() * 10) % 2 ? 'info': 'danger'">-4.34%</div>
+            <div class="btn" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
           </div>
         </div>
       </div>
-      <!-- <table cellspacing="0">
-        <thead>
-          <tr>
-            <td>
-              币种
-              <br/><span>市场容量</span>
-            </td>
-            <td>
-              价格
-              <br/><span>交易量</span>
-            </td>
-            <td>涨跌幅</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="i in 20">
-            <td>
-              Bitcoin
-              <br />
-              <span>$1296.83亿</span>
-            </td>
-            <td>
-              $7610.88
-              <br />
-              <span>$64.83亿</span>
-            </td>
-            <td>
-              <div class="btn" :class="parseInt(Math.random() * 10) % 2 ? 'info': 'danger'">-4.34%</div>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
   </block>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  
+  computed: {
+    ...mapState({
+      list: state => state.page.home.dailycoin
+    })
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -113,7 +87,7 @@ export default {
   }
 }
 .tbody {
-  max-height: 300px;
+  max-height: 600px;
   overflow-y: auto;
   &::-webkit-scrollbar{
     width: 6px;
