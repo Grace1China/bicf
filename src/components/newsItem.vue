@@ -14,7 +14,7 @@
           </div>
           <div class="meta-item" v-if="time">
             <icon type="clock" />
-            {{time}}
+            {{relativeTime}}
           </div>
           <div class="meta-item" v-if="spread">
             <icon type="notify" />
@@ -31,6 +31,8 @@
   </div>
 </template>
 <script>
+import time from '@/utils/time'
+
 export default {
   props: {
     title: String,
@@ -48,6 +50,12 @@ export default {
       type: Array,
       default: () => []
     },
+  },
+  computed: {
+    relativeTime() {
+      console.log(time(this.time))
+      return time(this.time).fromNow()
+    }
   }
 }
 </script>
@@ -89,8 +97,13 @@ export default {
       line-height:20px;
     }
     .meta {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
       .meta-item {
-        float: left;
+        // float: left;
+        display: inline;
         font-size: 12px;
         margin-right: 15px;
         color:rgba(34,34,34,1);
