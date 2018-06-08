@@ -3,7 +3,7 @@
     <div class="container">
       <div class="logo">
         <router-link to="/">
-          <img src="http://via.placeholder.com/112x36" alt="">
+          <img src="@/assets/logo.png">
         </router-link>
       </div>
       <div class="footer-navbar">
@@ -36,7 +36,7 @@ export default {
 .logo {
   float: left;
   img {
-    width:112px;
+    // width:112px;
     height:36px;
     vertical-align: middle;
   }

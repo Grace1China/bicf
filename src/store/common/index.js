@@ -16,19 +16,19 @@ export default {
       active: 0,
     },
     footer: [{
-      link: '/post/1',
+      link: '/',
       text: '关于我们',
     }, {
-      link: '/post/2',
+      link: '/',
       text: '服务条款',
     }, {
-      link: '/post/1',
+      link: '/',
       text: '联系我们',
     }, {
-      link: '/post/1',
+      link: '/',
       text: '投稿须知',
     }, {
-      link: '/post/1',
+      link: '/',
       text: '反馈意见',
     }]
   }
