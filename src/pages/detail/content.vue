@@ -11,7 +11,7 @@
         </div>
         <div class="meta-item" v-if="post.ctime">
           <icon type="clock" />
-          {{post.ctime}}
+          {{relativeTime(post.ctime)}}
         </div>
         <div class="meta-item" v-if="post.keyword && post.keyword.length">
           <icon type="tag" />
@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+import time from '@/utils/time'
 import { mapState } from 'vuex'
 
 export default {
@@ -61,6 +62,9 @@ export default {
   methods: {
     showAllHandler() {
       this.showAll = true
+    },
+    relativeTime(t) {
+      return time(t).fromNow()
     }
   }
 };
