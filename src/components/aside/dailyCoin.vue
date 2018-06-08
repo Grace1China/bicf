@@ -5,17 +5,17 @@
   >
     <div class="daily-coin">
       <div class="theader">
-        <div class="col">
+        <div class="col" @click="setOrder('name')">
           币种
           <br/>
           <span>市值</span>
         </div>
-        <div class="col">
+        <div class="col" @click="setOrder('price')">
           价格
           <br/>
           <span>交易量</span>
         </div>
-        <div class="col">
+        <div class="col" @click="setOrder('change_24h')">
           涨跌幅
         </div>
       </div>
@@ -41,12 +41,53 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import _ from 'underscore'
 
 export default {
+  data() {
+    return {
+      orderBy: '',
+      isDesc: true
+    }
+  },
   computed: {
     ...mapState({
-      list: state => state.page.home.dailycoin
-    })
+      dailycoin: state => state.page.home.dailycoin
+    }),
+    list() {
+      const isDesc = this.isDesc
+      let res
+      switch(this.orderBy) {
+        case 'name':
+          res = _.sortBy(this.dailycoin, i => i.name)
+          break;
+        case 'price':
+          res = _.sortBy(this.dailycoin, i => i.price)
+          break;
+        case 'change_24h':
+          res = _.sortBy(this.dailycoin, i => i.change_24h)
+          break;
+        case '':
+        default:
+          return [...this.dailycoin];
+      }
+      if(isDesc) {
+        res.reverse()
+      }
+
+      return res
+
+    }
+  },
+  methods:{
+    setOrder(type) {
+      if(this.orderBy == type) {
+        this.isDesc = !this.isDesc
+      } else {
+        this.orderBy = type
+        this.isDesc = true
+      }
+    }
   },
 }
 </script>
@@ -75,6 +116,7 @@ export default {
   .col {
     padding-top: 16px;
     padding-bottom: 15px;
+    cursor: pointer;
   }
 }
 .row {
