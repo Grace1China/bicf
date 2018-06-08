@@ -22,7 +22,7 @@
           </div>
           <div class="meta-item" v-if="tags.length">
             <icon type="tag" />
-            {{tags.join(', ')}}
+            {{tags.map(i => i.keyword).join(', ')}}
           </div>
         </div>
       </div>
