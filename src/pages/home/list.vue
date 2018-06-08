@@ -51,7 +51,7 @@ export default {
 
     window.addEventListener('scroll', e => {
       if(this.loading) return
-      const { top } = this.$refs.loadMore.getBoundingClientRect()
+      const { top } = this.$refs.loadMore && this.$refs.loadMore.getBoundingClientRect && this.$refs.loadMore.getBoundingClientRect()
       // console.log( top - window.innerHeight)
       const distence = top - window.innerHeight
       if(distence < 1000) {
