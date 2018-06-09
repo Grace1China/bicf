@@ -7,23 +7,24 @@
         </div>
         <div class="gradual-r"></div>
       <div class="banner-data">
-        <div v-for="(item, key) in list" :key="key" class="item active">
-          <h2>{{item[0].change_1h}}</h2>
-          <p>{{key}}</p>
+        <div v-for="(item, key) in chartData.series" :key="key" class="item active">
+          <h2>{{item.data[item.data.length - 1]}}%</h2>
+          <p><span class="color" :style="{backgroundColor: colors[key]}"></span>{{item.name}}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import _ from "underscore";
 import echarts from "echarts";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "home-banner",
   data: () => ({
     $chart: {},
-    colors: ['#F000BC', '#FFC900', '#7EC5FF']
+    colors: ["#F000BC", "#FFC900", "#7EC5FF"]
   }),
   computed: {
     ...mapState({
@@ -33,38 +34,57 @@ export default {
       const data = this.list;
       const option = {
         tooltip: {
-          position: function (pos, params, dom, rect, size) {
+          position: function(pos, params, dom, rect, size) {
             // console.log(pos)
-            let [x, y] = pos
-            if(x > 600) {
-              x = x - dom.clientWidth
-            } 
+            let [x, y] = pos;
+            if (x > 600) {
+              x = x - dom.clientWidth;
+            }
             return [x, y];
           },
+          formatter(params) {
+            console.log(
+              params,
+              data[params.seriesName][params.dataIndex].price
+            );
+            const item = data[params.seriesName][params.dataIndex];
+            // const price = item.price
+            let str = `
+              <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${
+                params.color
+              };"></span>${params.seriesName}
+              <br />
+              价格: $${item.price}
+              <br />
+              跌涨幅：${item.change_1h}%
+            `;
+            return str;
+          }
         },
         grid: {
-          left: '50',
+          left: "70"
         },
         xAxis: {
           show: false,
           data: []
         },
         yAxis: {
+          // show: false,
           axisLine: { show: false },
           splitLine: { show: false },
           axisTick: {
-            show: false,
+            show: false
           },
           axisLabel: {
             fontSize: 16,
-            color: '#fff',
+            color: "#fff",
+            formatter: "{value} %"
           },
           splitLine: {
-            show: false,
+            show: false
           }
         },
         series: []
-       
       };
 
       const series = {
@@ -75,35 +95,39 @@ export default {
         lineStyle: {
           width: 12,
           // color: '#7EC5FF',
-          opacity: '0.8'
+          opacity: "0.8"
         },
         itemStyle: {
           // color: '#7EC5FF',
         }
-      }
+      };
 
-      let index = 0
-      for(let key in data) {
-        const arr = data[key]
+      let index = 0;
+      for (let key in data) {
+        const arr = data[key];
         option.series.push({
           ...series,
           name: key,
           lineStyle: {
             ...series.lineStyle,
-            color: this.colors[index % this.colors.length],
+            color: this.colors[index % this.colors.length]
           },
           itemStyle: {
             ...series.itemStyle,
             color: this.colors[index % this.colors.length]
           },
-          data: arr.map(i => i.price)
-        })
-        option.xAxis.data = arr.map(i => i.time)
-        index++
+          data: arr.map(i => i.change_1h),
+          extraData: arr.map(i => i.price)
+        });
+        option.xAxis.data = arr.map(i => i.time);
+        index++;
       }
+      // const alldata = _.flatten(option.series.map(i => i.data))
+      // const min = _.min(alldata)
+      // console.log(min, alldata, option.series)
+      // option.yAxis.min = min
       return option;
-
-    },
+    }
   },
   mounted() {
     this.$chart = echarts.init(this.$refs.canvas);
@@ -130,15 +154,25 @@ export default {
 .banner-canvas {
   position: absolute;
   z-index: 0;
-  .canvas{
+  .canvas {
     width: 1200px;
     height: 300px;
   }
-  
 }
-.gradual-l, .gradual-r {
-  background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(255,255,255,0)),color-stop(70%, @mainBg));
-  background-image: linear-gradient(-90deg,rgba(255,255,255,0) 0%,@mainBg 70%);
+.gradual-l,
+.gradual-r {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(255, 255, 255, 0)),
+    color-stop(70%, @mainBg)
+  );
+  background-image: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 0) 0%,
+    @mainBg 70%
+  );
   position: absolute;
   width: 150px;
   height: 300px;
@@ -146,7 +180,6 @@ export default {
 }
 .gradual-l {
   left: 90px;
-
 }
 .gradual-r {
   right: 160px;
@@ -170,15 +203,24 @@ export default {
       margin: 0;
       padding-bottom: 10px;
       border-bottom: @mainBg solid 1px;
-      color: #7EC5FF;
+      color: #7ec5ff;
     }
-    &:hover,&.active {
+    &:hover,
+    &.active {
       p {
         color: #fff;
         border-bottom-color: #fff;
       }
     }
   }
+}
+.color {
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  // background-color: ;
 }
 </style>
 

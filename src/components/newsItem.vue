@@ -53,7 +53,6 @@ export default {
   },
   computed: {
     relativeTime() {
-      console.log(time(this.time))
       return time(this.time).fromNow()
     }
   }
