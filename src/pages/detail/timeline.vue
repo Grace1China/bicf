@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline">
+  <div class="timeline" v-if="list && list.length">
     <div class="title">
       时间线
     </div>

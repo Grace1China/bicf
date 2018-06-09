@@ -19,7 +19,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div class="expect">
+      <div class="expect" v-if="post.summary && post.summary.trim()">
         <span>
           摘要：
         </span>
@@ -27,7 +27,7 @@
       </div>
       <div class="post-body" v-html="post.content"></div>
     </div>
-    <div class="read-more" v-if="!showAll" @click="showAllHandler">
+    <div class="read-more" v-if="!showAll && post.id" @click="showAllHandler">
       显示全部
     </div>
   </div>

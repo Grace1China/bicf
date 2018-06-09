@@ -54,6 +54,8 @@ export default {
                 params.color
               };"></span>${params.seriesName}
               <br />
+              时间：${item.time}
+              <br />
               价格: $${item.price}
               <br />
               跌涨幅：${item.change_1h}%
