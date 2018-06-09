@@ -96,6 +96,8 @@ export default {
       color:rgba(34,34,34,1);
       line-height:22px;
       margin: 0;
+      max-height: 66px;
+      overflow: hidden;
     }
     .description {
       margin: 10px 0 20px;
