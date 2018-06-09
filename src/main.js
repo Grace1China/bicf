@@ -9,6 +9,8 @@ import App from './App'
 import router from './router'
 
 import store from '@/store'
+
+import '@/filters'
 import '@/components'
 import '@/assets/style/index.less'
 

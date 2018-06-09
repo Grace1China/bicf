@@ -3,6 +3,7 @@
     <div class="list-container">
       <news-item v-for="(item ,i) in news.list"
         :key="i"
+        :forceDesc="true"
         :link="'/post/' + item.id"
         :title="item.title"
         :description="item.summary"

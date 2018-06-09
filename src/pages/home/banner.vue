@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 import _ from "underscore";
 import echarts from "echarts";
 import { mapState } from "vuex";
@@ -56,7 +57,7 @@ export default {
               <br />
               时间：${item.time}
               <br />
-              价格: $${item.price}
+              价格: ${Vue.filter('currency')(item.price, '$')}
               <br />
               跌涨幅：${item.change_1h}%
             `;

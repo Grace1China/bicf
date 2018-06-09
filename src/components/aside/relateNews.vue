@@ -6,6 +6,7 @@
     <div class="hot-news">
       <news-item v-for="(item, i) in list"
         :key="i"
+        :metaAlign="true"
         :title="item.title"
         :location="item.media"
         :imgUrl="item.image"

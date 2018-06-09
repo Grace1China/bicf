@@ -24,12 +24,12 @@
           <div class="col">
             {{item.name}}
             <br />
-            <span>${{item.marketcap}}</span>
+            <span>{{item.marketcap | currency('$')}}</span>
           </div>
           <div class="col">
-            ${{item.price}}
+            {{item.price | currency('$')}}
             <br />
-            <span>${{item.volume_24h}}</span>
+            <span>{{item.volume_24h | currency('$')}}</span>
           </div>
           <div class="col">
             <div class="btn" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
@@ -102,7 +102,14 @@ export default {
   .col {
     flex: 1;
     &:first-of-type {
-      padding-left: 30px;
+      // padding-left: 15px;
+      // flex: 2;
+      margin-left: 30px;
+    }
+    &:last-of-type {
+      margin-right: 30px;
+      // width: 110px;
+      // text-align: right;
     }
     span {
       color:rgba(153,153,153,1);
@@ -153,6 +160,8 @@ export default {
   text-align: center;
   color: #fff;
   border-radius:5px;
+  margin-left: 6px;
+  // float: right;
   &.info {
     background: #13C2C2;
   }

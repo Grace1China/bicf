@@ -1,12 +1,12 @@
 <template>
   <div class="news-item">
-    <router-link :to="link">
+    <router-link :to="link" class="wrap" :class="metaAlign ? 'meta-align' : ''">
       <div class="thumbnail">
         <img :src="imgUrl" :alt="title">
       </div>
       <div class="info">
         <h1 v-if="title">{{title}}</h1>
-        <p v-if="description" class="description" v-html="description"></p>
+        <p v-if="desc || forceDesc" class="description" v-html="desc"></p>
         <div class="meta">
           <div class="meta-item" v-if="location">
             <icon type="location" />
@@ -41,6 +41,8 @@ export default {
       default: '/'
     },
     imgUrl: String,
+    forceDesc: Boolean,
+    metaAlign: Boolean,
     description: String,
     location: String,
     locationLink: String,
@@ -54,8 +56,14 @@ export default {
   computed: {
     relativeTime() {
       return time(this.time).fromNow()
+    },
+    desc() {
+      if(this.description && this.description.length > 70) {
+        return this.description.substr(0, 70) + '...'
+      }
+      return this.description
     }
-  }
+  },
 }
 </script>
 
@@ -90,10 +98,12 @@ export default {
       margin: 0;
     }
     .description {
-      margin: 10px 0;
+      margin: 10px 0 20px;
       font-size:14px;
       color:rgba(119,119,119,1);
       line-height:20px;
+      height: 40px;
+      overflow: hidden;
     }
     .meta {
       white-space: nowrap;
@@ -120,6 +130,16 @@ export default {
   &:after {
     float: none;
     clear: both;
+  }
+}
+.wrap {
+  display: block;
+  position: relative;
+}
+.meta-align {
+  .meta {
+    position: absolute;
+    bottom: 0;
   }
 }
 </style>
