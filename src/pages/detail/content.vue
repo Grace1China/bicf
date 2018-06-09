@@ -13,9 +13,9 @@
           <icon type="clock" />
           {{relativeTime(post.ctime)}}
         </div>
-        <div class="meta-item" v-if="post.keyword && post.keyword.length">
+        <div class="meta-item" v-if="post.keywords && post.keywords.length">
           <icon type="tag" />
-          {{post.keyword.join(', ')}}
+          {{post.keywords.map(i => i.keyword).join(', ')}}
         </div>
         <div class="clearfix"></div>
       </div>
