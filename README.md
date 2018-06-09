@@ -1,5 +1,10 @@
 # bishi
 
+# 部署
+
+**起个静态服务器指向项目的 `dist` 文件夹**
+
+
 > A Vue.js project
 
 ## Build Setup
