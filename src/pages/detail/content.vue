@@ -26,6 +26,9 @@
         {{post.summary}}
       </div>
       <div class="post-body" v-html="post.content"></div>
+      <div class="post-readorigin" v-if="post.url">
+        <a :href="post.url" target="_blank">查看原文</a>
+      </div>
     </div>
     <div class="read-more" v-if="!showAll && post.id" @click="showAllHandler">
       显示全部
@@ -106,6 +109,23 @@ export default {
 }
 .post-body {
   padding-bottom: 25px;
+}
+.post-readorigin {
+  // line-height: 60px;
+  // height: 60px;
+  text-align: center;
+  padding-bottom: 25px;
+  a {
+    border: 1px solid rgba(230, 230, 230, 1);
+    text-decoration: none;
+    color: rgba(66,100,251,1);
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 20px;
+    border-radius: 5px;
+    // padding: 5px 10px;
+  }
 }
 .read-more {
   color:rgba(66,100,251,1);

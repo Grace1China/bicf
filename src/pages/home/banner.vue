@@ -96,12 +96,19 @@ export default {
         // data: [1, 10, 30, 19, 15, 20],
         smooth: true,
         lineStyle: {
-          width: 12,
+          width: 8,
           // color: '#7EC5FF',
           opacity: "0.8"
         },
         itemStyle: {
           // color: '#7EC5FF',
+          // width: 12,
+          // backgroundColor: '#7EC5FF',
+
+          borderWidth: 5,
+          borderColor: '#fff',
+
+
         }
       };
 
