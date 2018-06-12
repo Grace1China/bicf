@@ -101,11 +101,11 @@ export default {
           opacity: "0.8"
         },
         itemStyle: {
-          // color: '#7EC5FF',
+          // color: '#fff',
           // width: 12,
           // backgroundColor: '#7EC5FF',
 
-          borderWidth: 5,
+          borderWidth: 6,
           borderColor: '#fff',
 
 
@@ -122,10 +122,10 @@ export default {
             ...series.lineStyle,
             color: this.colors[index % this.colors.length]
           },
-          itemStyle: {
-            ...series.itemStyle,
-            color: this.colors[index % this.colors.length]
-          },
+          // itemStyle: {
+          //   ...series.itemStyle,
+          //   // color: this.colors[index % this.colors.length]
+          // },
           data: arr.map(i => i.change_1h),
           extraData: arr.map(i => i.price)
         });
