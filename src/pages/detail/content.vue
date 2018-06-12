@@ -11,7 +11,7 @@
         </div>
         <div class="meta-item" v-if="post.ctime">
           <icon type="clock" />
-          {{relativeTime(post.ctime)}}
+          {{post.ctime}}
         </div>
         <div class="meta-item" v-if="post.keywords && post.keywords.length">
           <icon type="tag" />
