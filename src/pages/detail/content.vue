@@ -44,7 +44,7 @@ export default {
     return {
       maxHeight: 1000,
       currentHeight: 0,
-      showAll: false,
+      showAll: true,
     }
   },
   computed: {
