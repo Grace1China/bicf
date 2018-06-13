@@ -103,12 +103,23 @@ export default {
   }
 }
 .expect {
-  font-size: 14;
+  font-size: 14px;
+  background: #F2F6FD;
+  border-left: #DAE1E8 solid 6px;
+  padding: 20px 30px 20px 30px;
+  margin-left: -30px;
+  margin-right: -30px;
   line-height: 26px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
+  color: #222222;
+  font-weight: bold;
+  > span {
+    color: #4264FB;
+  }
 }
 .post-body {
   padding-bottom: 25px;
+  font-size: 14px;
 }
 .post-readorigin {
   // line-height: 60px;

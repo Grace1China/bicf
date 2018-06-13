@@ -101,7 +101,7 @@ export default {
           opacity: "0.8"
         },
         itemStyle: {
-          // color: '#fff',
+          color: '#fff',
           // width: 12,
           // backgroundColor: '#7EC5FF',
 
