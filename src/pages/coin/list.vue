@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="tbody">
-          <div v-for="(i) in 100" :key="i" class="row item">
+          <div v-for="(i) in 100" :key="i" class="row item" @click="$router.push({path:'/coin/p/1'})">
             <div class="col">
               {{i}}
             </div>
