@@ -29,7 +29,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .footer {
-  background:rgba(239,239,239,1);
+  background: #EFEFEF;
   padding-top: 60px;
   padding-bottom: 60px;
 }

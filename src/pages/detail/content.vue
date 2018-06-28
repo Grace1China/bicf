@@ -76,6 +76,7 @@ export default {
 .content-body {
   border-radius: 10px;
   border: 1px solid rgba(230, 230, 230, 1);
+  background: #fff;
   .inner {
     padding: 50px 30px 0;
     overflow: hidden;
@@ -104,8 +105,8 @@ export default {
 }
 .expect {
   font-size: 14px;
-  background: #F2F6FD;
-  border-left: #DAE1E8 solid 6px;
+  background: #F6F6F6;
+  border-left: #E6E6E6 solid 6px;
   padding: 20px 30px 20px 24px;
   margin-left: -30px;
   margin-right: -30px;

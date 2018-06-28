@@ -4,7 +4,7 @@
   >
     <div class="tag-list">
       <div class="inner">
-        <a href="javascrit:" v-for="(item, index) of list" :key="index" :style="{backgroundColor: colors[Math.abs(index % colors.length)]}">{{item.keyword}}</a>
+        <a href="javascrit:" v-for="(item, index) of list" :key="index" :style="{backgroundColor: colors[Math.abs(index % colors.length)]}" @click="goKeyword(item)">{{item.keyword}}</a>
       </div>
     </div>
   </block>
@@ -33,11 +33,25 @@ export default {
       list: state => state.page.home.hotkeys
     })
   },
+  mounted() {
+    this.$store.dispatch('getHotkeys')
+  },
+  methods: {
+    goKeyword(item) {
+      this.$router.push({
+        name: 'keyword',
+        params: {
+          keyword: item.id
+        }
+      })
+    }
+  }
 
 }
 </script>
 <style lang="less" scoped>
 .tag-list {
+  background: #fff;
   width: 100%;
   border-radius:10px;
   border:1px solid rgba(216,216,216,1);

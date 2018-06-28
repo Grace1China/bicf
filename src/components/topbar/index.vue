@@ -8,7 +8,7 @@
       </div>
       <navbar />
       <div class="search">
-        <input type="text" placeholder="请输入搜索关键字" />
+        <input type="text" placeholder="请输入搜索关键字" v-model.trim="keyword" @keyup.enter="onSearch" />
         <icon type="search" />
       </div>
     </div>
@@ -17,10 +17,30 @@
 
 <script>
 import navbar from "./navbar";
+import _ from 'underscore'
 
 export default {
+  data() {
+    return {
+      keyword: ''
+    }
+  },
   components: {
     navbar
+  },
+  methods: {
+    onSearch: _.debounce(function() {
+      console.log('will search ~~~~')
+      this.$router.push({ name: 'search', params: { keyword: this.keyword }})
+      // console.log(e, this.keyword)
+    }, 200)
+  },
+  watch: {
+    // keyword(newVal, oldVal) {
+    //   if(newVal) {
+    //     this.onSearch()
+    //   }
+    // }
   }
 };
 </script>

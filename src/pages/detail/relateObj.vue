@@ -24,6 +24,7 @@ export default {
   border-radius: 10px;
   border: 1px solid rgba(230, 230, 230, 1);
   color: #4264FB;
+  background: #fff;
 
   ul {
     li {

@@ -9,9 +9,9 @@ export default {
       list: [{
         link: '/',
         text: '首页',
-      // }, {
-      //   link: '/post/1',
-      //   text: '详情页',
+      }, {
+        link: '/coin/list',
+        text: '行情',
       }],
       active: 0,
     },

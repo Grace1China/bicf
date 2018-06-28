@@ -8,7 +8,7 @@
         <slot name="banner" />
       </div>
       <div class="container">
-        <div class="content">
+        <div class="content" :class="{ fullwidth }">
           <slot />
         </div>
         <div class="sidebar">
@@ -22,6 +22,17 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    fullwidth: Boolean
+  },
+  mounted() {
+    console.log(this.fullwidth)
+  }
+}
+</script>
+
 <style lang="less" scoped>
 @import "~@/assets/style/var";
 .layout {
@@ -40,6 +51,9 @@
   margin-right: 40px;
   float: left;
   margin-top: 30px;
+  &.fullwidth {
+    width: 100%;
+  }
 }
 .sidebar {
   width: 480px;

@@ -4,35 +4,37 @@
     :hasMore="false"
   >
     <div class="daily-coin">
-      <div class="theader">
-        <div class="col" @click="setOrder('name')">
-          币种
-          <br/>
-          <span>市值</span>
-        </div>
-        <div class="col" @click="setOrder('price')">
-          价格
-          <br/>
-          <span>交易量</span>
-        </div>
-        <div class="col" @click="setOrder('change_24h')">
-          涨跌幅
-        </div>
-      </div>
-      <div class="tbody">
-        <div v-for="(item, i) in list" :key="i" class="row item">
-          <div class="col">
-            {{item.name}}
-            <br />
-            <span>{{item.marketcap | currency('$')}}</span>
+      <div class="inner">
+        <div class="theader">
+          <div class="col" @click="setOrder('name')">
+            币种
+            <br/>
+            <span>市值</span>
           </div>
-          <div class="col">
-            {{item.price | currency('$')}}
-            <br />
-            <span>{{item.volume_24h | currency('$')}}</span>
+          <div class="col" @click="setOrder('price')">
+            价格
+            <br/>
+            <span>交易量</span>
           </div>
-          <div class="col">
-            <div class="btn" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
+          <div class="col" @click="setOrder('change_24h')">
+            涨跌幅
+          </div>
+        </div>
+        <div class="tbody">
+          <div v-for="(item, i) in list" :key="i" class="row item">
+            <div class="col">
+              {{item.name}}
+              <br />
+              <span>{{item.marketcap | currency('$')}}</span>
+            </div>
+            <div class="col">
+              {{item.price | currency('$')}}
+              <br />
+              <span>{{item.volume_24h | currency('$')}}</span>
+            </div>
+            <div class="col">
+              <div class="btn" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
+            </div>
           </div>
         </div>
       </div>
@@ -96,6 +98,7 @@ export default {
   width: 100%;
   border:1px solid rgba(241,242,246,1);
   border-radius:10px 10px 0px 0px;
+  background: #fff;
 }
 .theader, .row {
   display: flex;
@@ -120,6 +123,7 @@ export default {
 .theader {
   background:rgba(241,242,246,1);
   border-radius:10px 10px 0px 0px;
+  padding-right: 5px;
   .col {
     padding-top: 16px;
     padding-bottom: 15px;
@@ -138,6 +142,7 @@ export default {
 .tbody {
   max-height: 600px;
   overflow-y: auto;
+  margin-right: 5px;
   &::-webkit-scrollbar{
     width: 6px;
     height: 16px;

@@ -36,7 +36,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getBanner')
-    this.$store.dispatch('getHotkeys')
     this.$store.dispatch('getHotnews')
     this.$store.dispatch('getDailycoin')
   }

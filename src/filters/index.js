@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import time from '@/utils/time'
 
 const digitsRE = /(\d{3})(?=\d)/g
 
@@ -22,4 +23,8 @@ Vue.filter('currency', function(value, currency, decimals) {
   return sign + currency + head +
     _int.slice(i).replace(digitsRE, '$1,') +
     _float
+})
+
+Vue.filter('relateTime', (value) => {
+  return time(value).fromNow()
 })

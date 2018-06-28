@@ -14,7 +14,7 @@
           </div>
           <div class="meta-item" v-if="time">
             <icon type="clock" />
-            {{relativeTime}}
+            {{time | relateTime}}
           </div>
           <div class="meta-item" v-if="spread">
             <icon type="notify" />
@@ -31,7 +31,6 @@
   </div>
 </template>
 <script>
-import time from '@/utils/time'
 
 export default {
   props: {
@@ -54,9 +53,6 @@ export default {
     },
   },
   computed: {
-    relativeTime() {
-      return time(this.time).fromNow()
-    },
     desc() {
       if(this.description && this.description.length > 70) {
         return this.description.substr(0, 70) + '...'
@@ -70,6 +66,7 @@ export default {
 <style lang="less" scoped>
 .news-item {
   border-radius:10px;
+  background: #fff;
   border:1px solid rgba(230,230,230,1);
   padding: 25px 20px;
   margin-bottom: 20px;
