@@ -4,7 +4,7 @@
     <div class="coin-detail">
       <div class="inner">
         <h1 class="title">
-          <img src="http://placeholder.com/100?text=B">
+          <img src="http://via.placeholder.com/100?text=B">
           Bitcoin-BTC
           <span>
             当前价格：$6666.89 (5.66%)
@@ -36,12 +36,12 @@
             <button class="btn default">1天</button>
           </div>
           <div class="chart-detail">
-            <!-- chart -->
+            <div class="chart" ref="canvas"></div>
           </div>
           <div class="relate-coin">
             <news-item v-for="i in 10"
               :key="i"
-              imgUrl="http://placeholder.com/400?text=X"
+              imgUrl="http://via.placeholder.com/400?text=X"
               title="3000多人被骗3亿元！又一庞氏骗局曝光"
               :forceDesc="true"
               :link="'/post/1'"
@@ -60,11 +60,100 @@
   </layout>
 </template>
 <script>
+import _ from 'underscore'
 import NewsItem from '@/components/newsItem'
+import echarts from "echarts";
 
+const options = {
+  xAxis: { show: false, data: [] },
+  yAxis: {},
+  grid: { 
+    backgroundColor: '#FFF',
+  },
+}
+const series = {
+  type: "line",
+  // data: [1, 10, 30, 19, 15, 20],
+  smooth: true,
+  lineStyle: {
+    width: 2,
+    // color: '#4264FB',
+    // opacity: "1"
+  },
+  itemStyle: {
+    opacity: '0.01',
+    color: '#fff',
+    borderWidth: 0,
+    borderColor: '#fff',
+  }
+}
 export default {
+  data() {
+    return {
+      $chart: null,
+      colors: ['#02B000', '#4264FB', "#F000BC", "#FFC900", "#7EC5FF"],
+      chartDataList: [
+        {
+          name: 'test1',
+          data: [2,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6],
+        },
+        {
+          name: 'test2',
+          data: [9,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,14,15,16,9,13,14,15,11,14,13,9,6],
+        },
+      ]
+    }
+  },
   components: {
     NewsItem
+  },
+  computed: {
+    chartData() {
+      const chartOptions = {
+        ...options,
+        yAxis: [],
+        series: []
+      }
+      this.chartDataList.forEach((item, index) => {
+        const color = this.colors[index % this.colors.length]
+        chartOptions.yAxis.push({
+          ...options.yAxis,
+          color: color,
+          name: item.name,
+          min: _.min(item.data) - 1,
+          max: _.max(item.data) + 1,
+          axisLabel: {
+              formatter: '${value}'
+          },
+          axisLine: {
+              lineStyle: {
+                  color: color
+              }
+          },
+          splitLine: { show: !index },
+        })
+        chartOptions.series.push({
+          ...series,
+          yAxisIndex: index,
+          name: item.name,
+          data: item.data,
+          lineStyle: {
+            ...series.lineStyle,
+            color: color,
+          }
+        })
+      })
+      return chartOptions
+    },
+  },
+  mounted() {
+    this.$chart = echarts.init(this.$refs.canvas);
+    this.$chart.setOption(this.chartData);
+  },
+  watch: {
+    data(val) {
+      this.$chart.setOption(this.chartData);
+    }
   }
 }
 </script>
@@ -74,6 +163,13 @@ export default {
     font-size: 30px;
     color: #222222;
     margin-bottom: 50px;
+    img{
+      height: 40px;
+      width: auto;
+      position: relative;
+      top: -3px;
+      vertical-align: middle;
+    }
     span {
       padding-left: 60px;
     }
@@ -101,6 +197,14 @@ export default {
 .chart-detail {
   min-height: 350px;
   width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  .chart {
+    width: 100%;
+    height: 350px;
+  }
 }
 .actions {
   .btn {

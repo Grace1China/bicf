@@ -61,7 +61,7 @@
               5.56%
             </div>
             <div class="col">
-              走势图表
+              <mini-chart :data="[2,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6]"></mini-chart>
             </div>
           </div>
         </div>
@@ -71,8 +71,16 @@
   </layout>
 </template>
 <script>
+import echarts from "echarts";
+import MiniChart from '@/components/miniChart'
+
 export default {
-  
+  components: {
+    MiniChart,
+  },
+  mounted() {
+
+  }
 }
 </script>
 <style lang="less" scoped>
