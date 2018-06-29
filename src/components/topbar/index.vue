@@ -11,6 +11,7 @@
         <input type="text" placeholder="请输入搜索关键字" v-model.trim="keyword" @keyup.enter="onSearch" />
         <icon type="search" />
       </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 </template>
@@ -50,7 +51,10 @@ export default {
 #topbar {
   height: 100px;
   line-height: 100px;
-  background: @mainBg;
+  .container {
+    background: @mainBg;
+  }
+  // background: @mainBg;
   .logo {
     float: left;
     margin-right: 140px;

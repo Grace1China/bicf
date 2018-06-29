@@ -162,6 +162,7 @@ export default {
   }
 }
 .banner-canvas {
+    background: @mainBg;
   position: absolute;
   z-index: 0;
   .canvas {
@@ -196,10 +197,11 @@ export default {
   transform: rotate(180deg);
 }
 .banner-data {
-  float: right;
   text-align: right;
   z-index: 10;
   margin-top: 60px;
+  position: absolute;
+  right: 0;
   .item {
     color: #fff;
     margin-bottom: 31px;
