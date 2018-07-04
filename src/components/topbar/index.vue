@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import navbar from "./navbar";
 import _ from 'underscore'
 
@@ -29,19 +30,27 @@ export default {
   components: {
     navbar
   },
+  computed: {
+    ...mapState({
+      word: state => state.page.search.word,
+    })
+  },
   methods: {
     onSearch: _.debounce(function() {
-      console.log('will search ~~~~')
+      // console.log('will search ~~~~')
       this.$router.push({ name: 'search', params: { keyword: this.keyword }})
       // console.log(e, this.keyword)
     }, 200)
   },
   watch: {
-    // keyword(newVal, oldVal) {
-    //   if(newVal) {
-    //     this.onSearch()
-    //   }
-    // }
+    word(newVal, oldVal) {
+      this.keyword = newVal
+    }
+  },
+  mounted() {
+    if(this.word) {
+      this.keyword = this.word
+    }
   }
 };
 </script>

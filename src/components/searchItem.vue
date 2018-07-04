@@ -37,7 +37,7 @@
             </router-link>
           </div>
         </div>
-        <div class="showmore" @click="toggleShowMore">
+        <div v-if="list.length > 2" class="showmore" @click="toggleShowMore">
           查看更多
           <icon type="arrow" :class="{ reverse: showMore }" />
         </div>

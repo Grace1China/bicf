@@ -16,6 +16,10 @@ export default {
       relatenews: [],
       relateobj: [],
       timeline: [],
+    },
+    search: {
+      word: '',
+      list: []
     }
   },
   mutations: {
@@ -34,6 +38,11 @@ export default {
       state.detail.relatenews = []
       state.detail.relateobj = []
       state.detail.timeline = []
+    },
+    setSearch(state, data) {
+      for(let key in data) {
+        state.search[key] = data[key]
+      }
     }
   },
   actions,

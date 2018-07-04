@@ -56,3 +56,17 @@ export const getTimeLine = ({commit}, id) => request.get(`${APIHOST}/api/news/${
     timeline: res.data.data,
   })
 })
+
+export const searchNews = ({commit, state}, data) => {
+  return request.get(`${APIHOST}/api/search`, {
+    params: data
+  }).then(res => {
+    commit('setSearch', {
+      word: data.word,
+      list: [
+        ...state.search.list,
+        ...res.data.data.data
+      ]
+    })
+  })
+}
