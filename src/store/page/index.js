@@ -24,6 +24,9 @@ export default {
     keyword: {
       id: 0,
       list: []
+    },
+    coin: {
+      list: [],
     }
   },
   mutations: {
@@ -51,6 +54,11 @@ export default {
     setKeyword(state, data) {
       for(let key in data) {
         state.keyword[key] = data[key]
+      }
+    },
+    setCoin(state, data) {
+      for(let key in data) {
+        state.coin[key] = data[key]
       }
     },
   },

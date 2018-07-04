@@ -84,3 +84,16 @@ export const keywordNews = ({commit, state}, {id, ...data}) => {
     })
   })
 }
+
+export const getCoins = ({commit, state}, data) => {
+  return request.get(`${APIHOST}/api/coins`, {
+    params: data
+  }).then(res => {
+    commit('setCoin', {
+      list: [
+        // ...state.coin.list,
+        ...res.data.data.data
+      ]
+    })
+  })
+}
