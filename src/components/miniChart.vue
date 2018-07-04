@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import _ from 'underscore'
 import echarts from "echarts";
 
 const options = {
@@ -49,7 +50,12 @@ export default {
         width: 130,
         height: 30,
         ...options,
-        series: []
+        series: [],
+        yAxis: {
+          ...options.yAxis,
+          min: _.min(this.data),
+          // max: _.min(this.data)
+        }
       }
       chartOptions.series.push({
         ...series,
