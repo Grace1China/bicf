@@ -70,6 +70,7 @@
             </div>
           </div>
         </div>
+        <div ref="loadMore"></div>
       </div>
     </div>
     <footerBar slot="footer" />
@@ -86,10 +87,12 @@ const descFirst = ['marketcap', 'price', 'volume_24h', 'change_24h', 'range']
 export default {
   data() {
     return {
-      page: 1,
       orderBy: 'rank',
       orderAsc: true,
+      page: 1,
+      limit: 100,
       loading: false,
+      cacheList: []
     }
   },
   components: {
@@ -100,11 +103,16 @@ export default {
       coinlist: state => state.page.coin.list
     }),
     list() {
-      const listdata = this.coinlist.map((item, index) => ({
-        rank: index + 1,
-        chart: (item.coordinate || []).map(i => i.price),
-        ...item,
-      }))
+      let listdata
+      if(this.coinlist.length === this.cacheList.length) {
+        listdata = this.cacheList
+      } else {
+        listdata = this.coinlist.map((item, index) => ({
+          rank: index + 1,
+          chart: (item.coordinate || []).map(i => i.price),
+          ...item,
+        }))
+      }
       let list = listdata
       switch(this.orderBy) {
         case 'rank':
@@ -143,8 +151,12 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       this.$store.dispatch('getCoins', {
+        limit: this.limit,
         page: this.page++
+      }).then(() => {
+        this.loading = false
       })
     },
     setOrder(name) {
@@ -154,10 +166,25 @@ export default {
         this.orderBy = name
         this.orderAsc = !descFirst.includes(name)
       }
-    }
+    },
+    checkLoad(e) {
+      if(this.loading) return
+      const { top } = this.$refs.loadMore && this.$refs.loadMore.getBoundingClientRect && this.$refs.loadMore.getBoundingClientRect()
+      // console.log( top - window.innerHeight)
+      const distence = top - window.innerHeight
+      if(distence < 1000) {
+        this.loading = true
+        this.load()
+      }
+    },
   },
   mounted() {
     this.load() 
+    window.addEventListener('scroll', this.checkLoad)
+    window.dispatchEvent(new Event('scroll'))
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.checkLoad)
   }
 }
 </script>

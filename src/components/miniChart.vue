@@ -16,12 +16,13 @@ const options = {
 const series = {
   type: "line",
   // data: [1, 10, 30, 19, 15, 20],
-  smooth: false,
+  smooth: true,
   lineStyle: {
     width: 2,
     color: '#4264FB',
     opacity: "1"
   },
+  animation: false,
   itemStyle: {
     opacity: '0',
     color: '#fff',
@@ -41,7 +42,7 @@ export default {
   data() {
     return {
       $chart: null,
-
+      timer: null,
     }
   },
   computed: {
@@ -54,7 +55,7 @@ export default {
         yAxis: {
           ...options.yAxis,
           min: _.min(this.data),
-          // max: _.min(this.data)
+          max: _.max(this.data)
         }
       }
       chartOptions.series.push({
@@ -65,13 +66,20 @@ export default {
     }
   },
   mounted() {
-    this.$chart = echarts.init(this.$refs.chart);
-    this.$chart.setOption(this.chartData);
+    this.timer = setTimeout(() => {
+      this.$chart = echarts.init(this.$refs.chart);
+      this.$chart.setOption(this.chartData);
+      this.timer = null
+    }, 200)
   },
   watch: {
     data(val) {
-      this.$chart.setOption(this.chartData);
+      // this.$chart && this.$chart.setOption(this.chartData);
     }
+  },
+  destroyed() {
+    this.$chart && this.$chart.clear()
+    this.timer && clearTimeout(this.timer)
   }
 }
 </script>

@@ -91,7 +91,7 @@ export const getCoins = ({commit, state}, data) => {
   }).then(res => {
     commit('setCoin', {
       list: [
-        // ...state.coin.list,
+        ...state.coin.list,
         ...res.data.data.data
       ]
     })
