@@ -27,6 +27,10 @@ export default {
     },
     coin: {
       list: [],
+    },
+    coinDetail: {
+      detail: {},
+      news: []
     }
   },
   mutations: {
@@ -59,6 +63,11 @@ export default {
     setCoin(state, data) {
       for(let key in data) {
         state.coin[key] = data[key]
+      }
+    },
+    setCoinDetail(state, data) {
+      for(let key in data) {
+        state.coinDetail[key] = data[key]
       }
     },
   },

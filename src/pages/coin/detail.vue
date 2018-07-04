@@ -4,52 +4,54 @@
     <div class="coin-detail">
       <div class="inner">
         <h1 class="title">
-          <img src="http://via.placeholder.com/100?text=B">
-          Bitcoin-BTC
+          <img :src="basic.image">
+          {{basic.name}}-{{basic.symbol}}
           <span>
-            当前价格：$6666.89 (5.66%)
+            当前价格：{{basic.price | currency}} ({{basic.change_24h}}%)
           </span>
         </h1>
         <div class="number">
           <div class="non-item">
             <span class="btn primary">市值</span>
-            <span class="nonid">100亿</span>
+            <span class="nonid">{{basic.marketcap | currency}}</span>
           </div>
           <div class="non-item">
             <span class="btn primary">成交量</span>
-            <span class="nonid">100亿</span>
+            <span class="nonid">{{basic.volume_24h | currency}}</span>
           </div>
           <div class="non-item">
             <span class="btn primary">总供应量</span>
-            <span class="nonid">100亿</span>
+            <span class="nonid">{{basic.circulating_supply}}</span>
           </div>
           <div class="clearfix"></div>
         </div>
         <div class="coin-chart">
           <div class="actions">
-            <button class="btn default">1天</button>
-            <button class="btn primary">1周</button>
-            <button class="btn default">1月</button>
-            <button class="btn default">2月</button>
-            <button class="btn default">6月</button>
-            <button class="btn default">1天</button>
-            <button class="btn default">1天</button>
+            <button 
+              v-for="item in allTimeType"
+              :key="item.value"
+              class="btn"
+              :class="timeType === item.value ? 'primary' : 'default'"
+              @click="changeTimeType(item.value)"
+            >
+              {{item.text}}
+            </button>
           </div>
           <div class="chart-detail">
             <div class="chart" ref="canvas"></div>
           </div>
           <div class="relate-coin">
-            <news-item v-for="i in 10"
-              :key="i"
-              imgUrl="http://via.placeholder.com/400?text=X"
-              title="3000多人被骗3亿元！又一庞氏骗局曝光"
+            <news-item v-for="item in news"
+              :key="item.id"
+              :imgUrl="item.image"
+              :title="item.title"
               :forceDesc="true"
-              :link="'/post/1'"
-              :description="'一则警方通报，将数千人的“发财梦”彻底打碎。近日，深圳南山警方召开新闻通气会，通报了一起以发行虚拟货,一则警方通报，将数千人的“发财梦”彻底打碎。近日，深圳南山警方召开新闻通气会，通报了一起以发行虚拟货,一则警方通报，将数千人的“发财梦”彻底打碎。近日，深圳南山警方召开新闻通气会，通报…'"
-              :location="'人民网'"
-              :locationLink="''"
-              :time="'2018-05-20'"
-              :spread="5"
+              :link="'/post/' + item.id"
+              :description="item.summary"
+              :location="item.media"
+              :locationLink="item.url"
+              :time="item.ctime"
+              :spread="item.propagation"
               :tags="[]"
             />
           </div>
@@ -61,6 +63,7 @@
 </template>
 <script>
 import _ from 'underscore'
+import { mapState } from 'vuex'
 import NewsItem from '@/components/newsItem'
 import echarts from "echarts";
 
@@ -92,6 +95,37 @@ export default {
     return {
       $chart: null,
       colors: ['#02B000', '#4264FB', "#F000BC", "#FFC900", "#7EC5FF"],
+      allTimeType: [
+        {
+          value: '1d',
+          text: '1天'
+        },
+        {
+          value: '1w',
+          text: '1周'
+        },
+        {
+          value: '1m',
+          text: '1月'
+        },
+        {
+          value: '2m',
+          text: '2月'
+        },
+        {
+          value: '6m',
+          text: '6月'
+        },
+        {
+          value: '1y',
+          text: '1年'
+        },
+        {
+          value: 'all',
+          text: '全部'
+        },
+      ],
+      timeType: '1w',
       chartDataList: [
         {
           name: 'test1',
@@ -108,6 +142,13 @@ export default {
     NewsItem
   },
   computed: {
+    ...mapState({
+      detail: state => state.page.coinDetail.detail,
+      news: state => state.page.coinDetail.news,
+    }),
+    basic() {
+      return this.detail.basic || {}
+    },
     chartData() {
       const chartOptions = {
         ...options,
@@ -146,7 +187,20 @@ export default {
       return chartOptions
     },
   },
-  mounted() {
+  methods: {
+    async loadData() {
+      const cid = this.$route.params.id
+      await Promise.all([
+        this.$store.dispatch('getCoinDetail', cid),
+        this.$store.dispatch('getCoinNews', cid),
+      ])
+    },
+    changeTimeType(name) {
+      this.timeType = name
+    }
+  },
+  async mounted() {
+    await this.loadData()
     this.$chart = echarts.init(this.$refs.canvas);
     this.$chart.setOption(this.chartData);
   },
@@ -179,7 +233,7 @@ export default {
   margin-bottom: 100px;
   .non-item {
     border-radius: 0 0 5px 5px;
-    width: 130px;
+    // width: 130px;
     float: left;
     margin-right: 50px;
     text-align: center;
@@ -188,6 +242,7 @@ export default {
     .nonid {
       height: 36px;
       line-height: 36px;
+      padding: 0 25px;
     }
     .btn {
       display: block;
@@ -209,6 +264,10 @@ export default {
 .actions {
   .btn {
     margin-right: 30px;
+    &:focus {
+      border: none;
+      outline: 0;
+    }
   }
 }
 </style>
