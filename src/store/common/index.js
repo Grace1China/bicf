@@ -31,5 +31,10 @@ export default {
       link: '/',
       text: '反馈意见',
     }]
+  },
+  mutations: {
+    setNavbar(state, index) {
+      state.navbar.active = index
+    }
   }
 }

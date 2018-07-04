@@ -200,6 +200,7 @@ export default {
     }
   },
   async mounted() {
+    this.$store.commit('setNavbar', 1)
     await this.loadData()
     this.$chart = echarts.init(this.$refs.canvas);
     this.$chart.setOption(this.chartData);

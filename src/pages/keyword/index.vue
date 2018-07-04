@@ -107,6 +107,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('setNavbar', -1)
     this.resetData()
     this.load(this.$route.params.keyword)
 

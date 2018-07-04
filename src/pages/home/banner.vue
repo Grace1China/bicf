@@ -140,6 +140,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('setNavbar', 0)
     this.$chart = echarts.init(this.$refs.canvas);
     this.$chart.setOption(this.chartData);
   },

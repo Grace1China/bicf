@@ -39,6 +39,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('setNavbar', -1)
     this.$store.commit('resetDetail')
     window.scrollTo(0, 0)
     this.load(this.$route.params.id)
