@@ -70,3 +70,17 @@ export const searchNews = ({commit, state}, data) => {
     })
   })
 }
+
+export const keywordNews = ({commit, state}, {id, ...data}) => {
+  return request.get(`${APIHOST}/api/keywords/${id}`, {
+    params: data
+  }).then(res => {
+    commit('setKeyword', {
+      id: id,
+      list: [
+        ...state.keyword.list,
+        ...res.data.data.data
+      ]
+    })
+  })
+}

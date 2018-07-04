@@ -20,6 +20,10 @@ export default {
     search: {
       word: '',
       list: []
+    },
+    keyword: {
+      id: 0,
+      list: []
     }
   },
   mutations: {
@@ -43,7 +47,12 @@ export default {
       for(let key in data) {
         state.search[key] = data[key]
       }
-    }
+    },
+    setKeyword(state, data) {
+      for(let key in data) {
+        state.keyword[key] = data[key]
+      }
+    },
   },
   actions,
 }
