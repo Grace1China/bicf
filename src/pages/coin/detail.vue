@@ -16,7 +16,7 @@
             <span class="nonid">{{basic.marketcap | currency}}</span>
           </div>
           <div class="non-item">
-            <span class="btn primary">成交量</span>
+            <span class="btn primary">成交量(24h)</span>
             <span class="nonid">{{basic.volume_24h | currency}}</span>
           </div>
           <div class="non-item">
@@ -62,22 +62,31 @@
   </layout>
 </template>
 <script>
+import Vue from 'vue'
 import _ from 'underscore'
 import { mapState } from 'vuex'
 import NewsItem from '@/components/newsItem'
 import echarts from "echarts";
 
 const options = {
-  xAxis: { show: false, data: [] },
+  xAxis: {
+    show: false,
+    data: [],
+    axisLabel: {
+      formatter: ''
+    },
+  },
   yAxis: {},
   grid: { 
     backgroundColor: '#FFF',
+    right: 250,
   },
+  
 }
 const series = {
   type: "line",
   // data: [1, 10, 30, 19, 15, 20],
-  smooth: true,
+  smooth: false,
   lineStyle: {
     width: 2,
     // color: '#4264FB',
@@ -97,27 +106,27 @@ export default {
       colors: ['#02B000', '#4264FB', "#F000BC", "#FFC900", "#7EC5FF"],
       allTimeType: [
         {
-          value: '1d',
+          value: '1',
           text: '1天'
         },
         {
-          value: '1w',
+          value: '7',
           text: '1周'
         },
         {
-          value: '1m',
+          value: '30',
           text: '1月'
         },
         {
-          value: '2m',
+          value: '60',
           text: '2月'
         },
         {
-          value: '6m',
+          value: '180',
           text: '6月'
         },
         {
-          value: '1y',
+          value: '365',
           text: '1年'
         },
         {
@@ -125,17 +134,17 @@ export default {
           text: '全部'
         },
       ],
-      timeType: '1w',
-      chartDataList: [
-        {
-          name: 'test1',
-          data: [2,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6],
-        },
-        {
-          name: 'test2',
-          data: [9,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,14,15,16,9,13,14,15,11,14,13,9,6],
-        },
-      ]
+      timeType: '7',
+      // chartDataList: [
+      //   {
+      //     name: 'test1',
+      //     data: [2,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6,2,4,4,5,6,2,3,4,5,1,4,3,2,6],
+      //   },
+      //   {
+      //     name: 'test2',
+      //     data: [9,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,19,15,16,9,13,19,15,11,19,13,9,16,9,19,14,15,16,9,13,14,15,11,14,13,9,6],
+      //   },
+      // ]
     }
   },
   components: {
@@ -149,19 +158,56 @@ export default {
     basic() {
       return this.detail.basic || {}
     },
+    chartDataList() {
+      const list = []
+      const priceMap = {
+        name: '价格',
+        data: [],
+      }
+      const marketcapMap = {
+        name:'市值',
+        data: [],
+      }
+      const volumeMap = {
+        name: '成交量(24h)',
+        data: [],
+      };
+      (this.detail.coordinate || []).forEach(item => {
+        priceMap.data.push(item.price)
+        marketcapMap.data.push(item.marketcap)
+        volumeMap.data.push(item.volume_24h)
+      })
+      return [priceMap, marketcapMap, volumeMap]
+    },
     chartData() {
       const chartOptions = {
         ...options,
         yAxis: [],
         series: []
       }
+      const yPosition = [
+        {
+          type: 'left',
+          offset: 0,
+        }, {
+          type: 'right',
+          offset: 0,
+        }, {
+          type: 'right',
+          offset: 100,
+        }, 
+      ]
       this.chartDataList.forEach((item, index) => {
         const color = this.colors[index % this.colors.length]
+        let min = _.min(item.data) - (index !== 1 ? 100 : 0)
+        if (min < 0) {
+          min = 0
+        }
         chartOptions.yAxis.push({
           ...options.yAxis,
           color: color,
           name: item.name,
-          min: _.min(item.data) - 1,
+          min: min,
           max: _.max(item.data) + 1,
           axisLabel: {
               formatter: '${value}'
@@ -172,6 +218,8 @@ export default {
               }
           },
           splitLine: { show: !index },
+          position: yPosition[index].type,
+          offset: yPosition[index].offset,
         })
         chartOptions.series.push({
           ...series,
@@ -184,19 +232,58 @@ export default {
           }
         })
       })
+      // chartOptions.tooltip = {
+      //   show: true
+      // }
+      chartOptions.xAxis.data = (this.detail.coordinate || []).map(i => i.time)
+      chartOptions.tooltip = {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        },
+        formatter: ([price, marketcap, volume]) => {
+          // console.log(price)
+          let str = `
+              ${price.name}
+              <br />
+              <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${
+                this.colors[0]
+              };"></span>
+              价格: ${Vue.filter('currency')(price.value, '$')}
+              <br />
+              <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${
+                this.colors[1]
+              };"></span>
+              市值: ${Vue.filter('currency')(marketcap.value, '$')}
+              <br />
+              <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${
+                this.colors[2]
+              };"></span>
+              成交量(24h): ${Vue.filter('currency')(volume.value, '$')}
+            `;
+          return str
+        }
+      }
       return chartOptions
     },
   },
   methods: {
+    async loadDetail() {
+      this.$store.dispatch('getCoinDetail', {
+        id: this.$route.params.id,
+        day: this.timeType
+      })
+    },
     async loadData() {
       const cid = this.$route.params.id
       await Promise.all([
-        this.$store.dispatch('getCoinDetail', cid),
+        this.loadDetail(),
         this.$store.dispatch('getCoinNews', cid),
       ])
     },
     changeTimeType(name) {
       this.timeType = name
+      this.loadDetail()
     }
   },
   async mounted() {
@@ -206,8 +293,14 @@ export default {
     this.$chart.setOption(this.chartData);
   },
   watch: {
-    data(val) {
+    detail(val) {
       this.$chart.setOption(this.chartData);
+    },
+    $route(val, oldVal) {
+      if(val.params.id != oldVal.params.id) {
+        // this.$store.commit('resetDetail')
+        this.loadData()
+      }
     }
   }
 }

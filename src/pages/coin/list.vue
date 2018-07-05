@@ -230,12 +230,18 @@ export default {
   }
 }
 .row {
+  transition: background 200ms;
+  cursor: pointer;
+  &:hover {
+    background: #f1f1f1;
+  }
   .col {
     .coin-logo {
       width: 20px;
       height: 20px;
       vertical-align: middle;
       margin-right: 15px;
+      
     }
     &.left {
       text-align: left;
@@ -243,6 +249,7 @@ export default {
     &:first-of-type {
       background: #F6F6F6;
     }
+    
     .col-inner {
       padding-left: 25px;
     }
@@ -257,6 +264,7 @@ export default {
       // text-overflow: ellipsis;
       vertical-align: middle;
     }
+    cursor: pointer;
     font-size: 14px;
     color:rgba(34,34,34,1);
     // padding-top: 14px;

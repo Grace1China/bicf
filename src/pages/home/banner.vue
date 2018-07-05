@@ -44,10 +44,10 @@ export default {
             return [x, y];
           },
           formatter(params) {
-            console.log(
-              params,
-              data[params.seriesName][params.dataIndex].price
-            );
+            // console.log(
+            //   params,
+            //   data[params.seriesName][params.dataIndex].price
+            // );
             const item = data[params.seriesName][params.dataIndex];
             // const price = item.price
             let str = `

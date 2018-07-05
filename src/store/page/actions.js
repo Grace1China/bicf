@@ -98,7 +98,7 @@ export const getCoins = ({commit, state}, data) => {
   })
 }
 
-export const getCoinDetail = ({commit}, id) => request.get(`${APIHOST}/api/coins/${id}`).then(res => {
+export const getCoinDetail = ({commit}, {id, ...params}) => request.get(`${APIHOST}/api/coins/${id}`, { params }).then(res => {
   commit('setCoinDetail', {
     detail: res.data.data,
   })
