@@ -85,6 +85,7 @@ const options = {
 }
 const series = {
   type: "line",
+  animation: false,
   // data: [1, 10, 30, 19, 15, 20],
   smooth: false,
   lineStyle: {
@@ -302,6 +303,9 @@ export default {
         this.loadData()
       }
     }
+  },
+  destroyed() {
+    this.$chart && this.$chart.clear()
   }
 }
 </script>
