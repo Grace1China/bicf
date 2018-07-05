@@ -20,9 +20,10 @@
             <icon type="notify" />
             传播度({{spread}})
           </div>
-          <div class="meta-item" v-if="tags.length">
+          <div class="meta-item tag" v-if="tags.length">
             <icon type="tag" />
-            {{tags.map(i => i.keyword).join(', ')}}
+            <router-link v-for="(tag, index) in tags" :to="'/keyword/' + (tag.keyword_id || tag.id)" :key="index">{{tag.keyword}}</router-link>
+            
           </div>
         </div>
       </div>
@@ -122,6 +123,16 @@ export default {
         :global(.iconfont) {
           margin-right: 5px;
           color: #597EF7;
+        }
+        &.tag {
+          a {
+            &::after {
+              content: '，';
+            }
+            &:last-of-type::after {
+              content: '';
+            }
+          }
         }
       }
     }

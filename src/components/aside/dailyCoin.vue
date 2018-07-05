@@ -33,7 +33,7 @@
               <span>{{item.volume_24h | currency('$')}}</span>
             </div>
             <div class="col">
-              <div class="btn" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
+              <div class="btnx" :class="item.change_24h >= 0 ? 'info': 'danger'">{{item.change_24h}}%</div>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default {
 }
 }
 
-.btn {
+.btnx {
   width:110px;
   height:36px;
   line-height: 36px;

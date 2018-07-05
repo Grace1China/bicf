@@ -270,7 +270,7 @@ export default {
   },
   methods: {
     async loadDetail() {
-      this.$store.dispatch('getCoinDetail', {
+      return this.$store.dispatch('getCoinDetail', {
         id: this.$route.params.id,
         day: this.timeType
       })
@@ -295,7 +295,7 @@ export default {
   },
   watch: {
     detail(val) {
-      this.$chart.setOption(this.chartData);
+      this.$chart && this.$chart.setOption(this.chartData);
     },
     $route(val, oldVal) {
       if(val.params.id != oldVal.params.id) {

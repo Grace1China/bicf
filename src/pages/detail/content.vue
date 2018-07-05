@@ -13,9 +13,10 @@
           <icon type="clock" />
           {{post.ctime}}
         </div>
-        <div class="meta-item" v-if="post.keywords && post.keywords.length">
+        <div class="meta-item tag" v-if="post.keywords && post.keywords.length">
           <icon type="tag" />
-          {{post.keywords.map(i => i.keyword).join(', ')}}
+          <router-link v-for="(tag, index) in post.keywords" :to="'/keyword/' + (tag.keyword_id || tag.id)" :key="index">{{tag.keyword}}</router-link>
+          
         </div>
         <div class="clearfix"></div>
       </div>
@@ -100,6 +101,24 @@ export default {
     color: rgba(155, 155, 155, 1);
     :global(.iconfont) {
       margin-right: 5px;
+    }
+    a {
+      text-decoration: none;
+      color: #9b9b9b;
+    }
+    &.tag {
+      :global(.iconfont) {
+        position: relative;
+        top: 2px;
+      }
+      a {
+        &::after {
+          content: '，';
+        }
+        &:last-of-type::after {
+          content: '';
+        }
+      }
     }
   }
 }

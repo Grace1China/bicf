@@ -180,6 +180,7 @@ export default {
   },
   mounted() {
     this.$store.commit('setNavbar', 1)
+    this.$store.commit('setCoin', {list: []})
     this.load() 
     window.addEventListener('scroll', this.checkLoad)
     window.dispatchEvent(new Event('scroll'))
