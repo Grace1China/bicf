@@ -2,18 +2,20 @@
   <ul class="timeline">
 
     <!-- Item 1 -->
-    <li v-for="(item, i) in list" :key="i">
+    <li v-for="(item, i) in list" :key="i" >
       <div class="direction-r">
         <div class="flag-wrapper">
           <span class="time-wrapper">
             <span class="text">{{item.date}}</span>
             <span class="line"></span>
           </span>
+          <a :link="'/post/' + item.item_id">
           <span class="flag">{{item.text}}</span>
+          </a>
         </div>
       </div>
     </li>
-    
+
   </ul>
 </template>
 <script>
