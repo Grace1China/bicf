@@ -16,14 +16,14 @@
             <icon type="clock" />
             {{time | relateTime}}
           </div>
-          <div class="meta-item" v-if="spread">
+          <div class="meta-item" v-if="false">
             <icon type="notify" />
             传播度({{spread}})
           </div>
           <div class="meta-item tag" v-if="tags.length">
             <icon type="tag" />
             <router-link v-for="(tag, index) in tags" :to="'/keyword/' + (tag.keyword_id || tag.id)" :key="index">{{tag.keyword}}</router-link>
-            
+
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div v-if="title" class="title">
       <span class="color"></span>
       <h3 v-html="title"></h3>
-      <a v-if="hasMore" class="more" href="javascript:">更多</a>
+       <a v-if="false" class="more" href="javascript:">更多</a>
     </div>
     <div class="content">
       <slot />

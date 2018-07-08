@@ -9,6 +9,7 @@
           :key="i"
           :metaAlign="true"
           :title="item.title"
+          :description="item.summary"
           :location="item.media"
           :imgUrl="item.image"
           :link="'/post/' + item.news_id"

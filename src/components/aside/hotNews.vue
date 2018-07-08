@@ -7,6 +7,7 @@
         :key="index"
         :link="'/post/' + item.news_id"
         :title="item.title"
+        :description="item.summary"
         :imgUrl="item.image"
       />
     </div>
