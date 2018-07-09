@@ -2,7 +2,7 @@
   <block title="相关人物和事件" :hasMore="false" v-if="list && list.length">
     <div class="relate-obj">
       <ul>
-        <li v-for="(item, i) in list" :key="i"><a href="javascript:" v-text="item.text"></a></li>
+        <li v-for="(item, i) in list" :key="i"><router-link :to="'/search/' + item.text" v-text="item.text"></router-link></li>
       </ul>
     </div>
   </block>

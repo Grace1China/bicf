@@ -9,9 +9,9 @@
             <span class="text">{{item.date}}</span>
             <span class="line"></span>
           </span>
-          <a :link="'/post/' + item.item_id">
-          <span class="flag">{{item.text}}</span>
-          </a>
+          <router-link :to="'/post/' + item.item_id">
+            <span class="flag">{{item.text}}</span>
+          </router-link>
         </div>
       </div>
     </li>
