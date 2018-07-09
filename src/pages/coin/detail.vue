@@ -7,21 +7,32 @@
           <img :src="basic.image">
           {{basic.name}}-{{basic.symbol}}
           <span>
-            当前价格：{{basic.price | currency}} ({{basic.change_24h}}%)
+            当前价格：{{basic.price | currency}} 
+            (<i :class="basic.change_24h >= 0 ? 'price-up' : 'price-down'">
+              {{basic.change_24h}}%
+            </i>)
           </span>
         </h1>
         <div class="number">
           <div class="non-item">
             <span class="btn primary">市值</span>
-            <span class="nonid">{{basic.marketcap | currency}}</span>
+            <span class="nonid">
+              {{basic.marketcap | shortCurrency}}
+              ({{basic.marketcap | currency}})
+            </span>
           </div>
           <div class="non-item">
             <span class="btn primary">成交量(24h)</span>
-            <span class="nonid">{{basic.volume_24h | currency}}</span>
+            <span class="nonid">
+              {{basic.volume_24h | shortCurrency}}
+              ({{basic.volume_24h | currency}})
+            </span>
           </div>
           <div class="non-item">
             <span class="btn primary">总供应量</span>
-            <span class="nonid">{{basic.circulating_supply}}</span>
+            <span class="nonid">
+              {{basic.circulating_supply}}
+            </span>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -288,6 +299,7 @@ export default {
     }
   },
   async mounted() {
+    window.scrollTo({top: 0})
     this.$store.commit('setNavbar', 1)
     await this.loadData()
     this.$chart = echarts.init(this.$refs.canvas);
@@ -324,6 +336,9 @@ export default {
     }
     span {
       padding-left: 60px;
+      i {
+        font-style: normal;
+      }
     }
   }
 }

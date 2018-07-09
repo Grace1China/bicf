@@ -7,36 +7,43 @@
           <div class="col" @click="setOrder('rank')">
             <div class="btn primary">
               #
+              <icon v-if="orderBy === 'rank'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('name')">
             <div class="btn primary">
               币种
+              <icon v-if="orderBy === 'name'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('marketcap')">
             <div class="btn primary">
               市值
+              <icon v-if="orderBy === 'marketcap'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('price')">
             <div class="btn primary">
               价格
+              <icon v-if="orderBy === 'price'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('volume_24h')">
             <div class="btn primary">
               成交量(24h)
+              <icon v-if="orderBy === 'volume_24h'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('change_24h')">
             <div class="btn primary">
               涨跌幅(24h)
+              <icon v-if="orderBy === 'change_24h'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
           <div class="col" @click="setOrder('range')">
             <div class="btn primary">
               近期走势(7d)
+              <icon v-if="orderBy === 'range'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
         </div>
@@ -62,7 +69,7 @@
             <div class="col">
               {{item.volume_24h | currency}}
             </div>
-            <div class="col">
+            <div class="col" :class="item.change_24h >= 0 ? 'price-up' : 'price-down'">
               {{item.change_24h}}%
             </div>
             <div class="col">
@@ -210,6 +217,10 @@ export default {
       // margin-right: 30px;
       // width: 110px;
       // text-align: right;
+    }
+    :global(.iconfont) {
+      color: #eaeaea;
+      // font-size: 16px;
     }
     span {
       color:rgba(153,153,153,1);

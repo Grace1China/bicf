@@ -11,6 +11,7 @@
           :title="item.title"
           :description="item.summary"
           :location="item.media"
+          :locationLink="item.url"
           :imgUrl="item.image"
           :link="'/post/' + item.news_id"
         />

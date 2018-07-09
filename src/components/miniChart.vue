@@ -10,7 +10,7 @@ import echarts from "echarts";
 const options = {
   xAxis: { show: false, data: [] },
   yAxis: { show: false },
-  grid: { top: 0, left: 0 },
+  grid: { top: 2, left: 0, bottom: 2, right: 2 },
   
 }
 const series = {
@@ -49,7 +49,7 @@ export default {
     chartData() {
       const chartOptions = {
         width: 130,
-        height: 30,
+        height: 26,
         ...options,
         series: [],
         yAxis: {

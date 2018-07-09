@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="tbody">
-          <div v-for="(item, i) in list" :key="i" class="row item">
+          <div v-for="(item, i) in list" :key="i" class="row item" @click="$router.push('/coin/p/' + item.id)">
             <div class="col">
               {{item.name}}
               <br />
@@ -107,7 +107,7 @@ export default {
     &:first-of-type {
       // padding-left: 15px;
       // flex: 2;
-      margin-left: 30px;
+      margin-left: 15px;
     }
     &:last-of-type {
       margin-right: 30px;
@@ -131,6 +131,12 @@ export default {
   }
 }
 .row {
+  transition: background 200ms;
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    background: #f1f1f1;
+  }
   .col {
     font-size: 14px;
     color:rgba(34,34,34,1);

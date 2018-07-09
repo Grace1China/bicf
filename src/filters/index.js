@@ -25,6 +25,22 @@ Vue.filter('currency', function(value, currency, decimals) {
     _float
 })
 
+Vue.filter('shortCurrency', (value, unit = '美元') => {
+  const stages = ['', '万', '亿']
+  const stageStep = 10000
+  let stageIndex = 0
+  let number = value
+  for(;;) {
+    if(number > stageStep) {
+      number = number / stageStep
+      stageIndex++
+    } else {
+      break
+    }
+  }
+  return `${number.toFixed(2)}${stages[stageIndex]}${unit}`
+})
+
 Vue.filter('relateTime', (value) => {
   return time(value).fromNow()
 })
