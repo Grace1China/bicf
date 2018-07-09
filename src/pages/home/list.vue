@@ -1,6 +1,7 @@
 <template>
   <div class="list news-list">
-    <div class="list-container">
+    <loading v-if="loading" />
+    <div v-else class="list-container">
       <news-item v-for="(item ,i) in news.list"
         :key="i"
         :forceDesc="true"

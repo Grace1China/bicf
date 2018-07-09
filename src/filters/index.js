@@ -26,6 +26,9 @@ Vue.filter('currency', function(value, currency, decimals) {
 })
 
 Vue.filter('shortCurrency', (value, unit = '美元') => {
+  if (!value) {
+    return value
+  }
   const stages = ['', '万', '亿']
   const stageStep = 10000
   let stageIndex = 0

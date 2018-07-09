@@ -2,7 +2,8 @@
   <layout fullwidth>
     <topbar slot="topbar" />
     <div class="coin-detail">
-      <div class="inner">
+      <loading v-if="loading" />
+      <div v-else class="inner">
         <h1 class="title">
           <img :src="basic.image">
           {{basic.name}}-{{basic.symbol}}
@@ -114,6 +115,7 @@ const series = {
 export default {
   data() {
     return {
+      loading: true,
       $chart: null,
       colors: ['#02B000', '#4264FB', "#F000BC", "#FFC900", "#7EC5FF"],
       allTimeType: [
@@ -292,6 +294,7 @@ export default {
         this.loadDetail(),
         this.$store.dispatch('getCoinNews', cid),
       ])
+      this.loading = false
     },
     changeTimeType(name) {
       this.timeType = name
@@ -299,6 +302,7 @@ export default {
     }
   },
   async mounted() {
+    this.loading = true
     window.scrollTo({top: 0})
     this.$store.commit('setNavbar', 1)
     await this.loadData()
