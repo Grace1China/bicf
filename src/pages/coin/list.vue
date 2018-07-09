@@ -40,7 +40,7 @@
               <icon v-if="orderBy === 'change_24h'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
-          <div class="col" @click="setOrder('range')">
+          <div class="col">
             <div class="btn primary">
               近期走势(7d)
               <icon v-if="orderBy === 'range'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
