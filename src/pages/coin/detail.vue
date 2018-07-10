@@ -306,8 +306,10 @@ export default {
     window.scrollTo({top: 0})
     this.$store.commit('setNavbar', 1)
     await this.loadData()
-    this.$chart = echarts.init(this.$refs.canvas);
-    this.$chart.setOption(this.chartData);
+    this.$nextTick(() => {
+      this.$chart = echarts.init(this.$refs.canvas);
+      this.$chart.setOption(this.chartData);
+    })
   },
   watch: {
     detail(val) {

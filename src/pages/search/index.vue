@@ -10,6 +10,7 @@
           :main="item.main"
           :list="item.list"
         />
+        <loading v-if="loading" />
         <div ref="loadMore"></div>
       </div>
     </div>
@@ -64,9 +65,9 @@ export default {
     searchItem
   },
   methods: {
-    resetData() {
+    resetData(word = this.$route.params.keyword) {
       this.$store.commit('setSearch', {
-        word: this.$route.params.keyword,
+        word: word,
         list: []
       })
     },
@@ -96,7 +97,7 @@ export default {
       if(val.params.keyword != oldVal.params.keyword) {
         // console.log('do search')
         this.page = 1
-        this.resetData()
+        this.resetData(val.params.keyword)
         this.load(val.params.keyword)
       }
     }

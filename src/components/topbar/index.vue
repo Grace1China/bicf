@@ -38,7 +38,14 @@ export default {
   methods: {
     onSearch: _.debounce(function() {
       // console.log('will search ~~~~')
-      this.$router.push({ name: 'search', params: { keyword: this.keyword }})
+      if(this.keyword) {
+        this.$router.push({ name: 'search', params: { keyword: this.keyword }})
+      } else {
+        this.$store.commit('setSearch', {
+          word: ''
+        })
+        this.$router.push({ name: 'home' })
+      }
       // console.log(e, this.keyword)
     }, 200)
   },

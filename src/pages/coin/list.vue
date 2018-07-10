@@ -2,8 +2,7 @@
   <layout fullwidth>
     <topbar slot="topbar" />
     <div class="coin-table">
-      <loading v-if="loading" />
-      <div v-else class="inner">
+      <div class="inner">
         <div class="theader">
           <div class="col" @click="setOrder('rank')">
             <div class="btn primary">
@@ -78,6 +77,7 @@
             </div>
           </div>
         </div>
+        <loading v-if="loading" />
         <div ref="loadMore"></div>
       </div>
     </div>

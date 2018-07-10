@@ -13,6 +13,7 @@
           :main="item.main"
           :list="item.list"
         />
+        <loading v-if="loading" />
         <div ref="loadMore"></div>
       </div>
     </div>
