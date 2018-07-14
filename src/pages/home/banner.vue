@@ -1,11 +1,11 @@
 <template>
   <div class="banner">
     <div class="container">
-        <div class="gradual-l"></div>
+        <!-- <div class="gradual-l"></div> -->
         <div class="banner-canvas">
           <div class="canvas" ref="canvas" width="1200" height="300"></div>
         </div>
-        <div class="gradual-r"></div>
+        <!-- <div class="gradual-r"></div> -->
       <div class="banner-data">
         <div v-for="(item, key) in chartData.series" :key="key" class="item active">
           <h2>{{item.data[item.data.length - 1]}}%</h2>
@@ -25,7 +25,7 @@ export default {
   name: "home-banner",
   data: () => ({
     $chart: {},
-    colors: ["#F000BC", "#FFC900", "#7EC5FF"]
+    colors: ["#ff6464", "#00c37e", "#7EC5FF"]
   }),
   computed: {
     ...mapState({
@@ -68,45 +68,69 @@ export default {
           left: "70"
         },
         xAxis: {
-          show: false,
+          show: true,
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#002652'
+            }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#002652'
+            }
+          },
+          axisLabel: {
+            formatter: ''
+          },
           data: []
         },
         yAxis: {
           // show: false,
-          axisLine: { show: false },
-          splitLine: { show: false },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#002652'
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#002652'
+            }
+          },
           axisTick: {
             show: false
           },
           axisLabel: {
             fontSize: 16,
-            color: "#fff",
+            color: "#81AADD",
+            borderColor: '#002652',
             formatter: "{value} %"
           },
-          splitLine: {
-            show: false
-          }
         },
         series: []
       };
 
       const series = {
+        symbol: "",
         // name: "Data Display3",
         type: "line",
         // data: [1, 10, 30, 19, 15, 20],
         smooth: true,
         lineStyle: {
-          width: 8,
+          width: 3,
           // color: '#7EC5FF',
           opacity: "0.8"
         },
         itemStyle: {
-          color: '#fff',
+          // color: '#fff',
           // width: 12,
           // backgroundColor: '#7EC5FF',
 
-          borderWidth: 6,
-          borderColor: '#fff',
+          borderWidth: 5,
+          // borderColor: '#fff',
 
 
         }
@@ -115,17 +139,20 @@ export default {
       let index = 0;
       for (let key in data) {
         const arr = data[key];
+        const color = this.colors[index % this.colors.length]
         option.series.push({
           ...series,
           name: key,
           lineStyle: {
             ...series.lineStyle,
-            color: this.colors[index % this.colors.length]
+            color: color
           },
-          // itemStyle: {
-          //   ...series.itemStyle,
-          //   // color: this.colors[index % this.colors.length]
-          // },
+          itemStyle: {
+            ...series.itemStyle,
+            // borderWidth: 0,
+            borderColor: color,
+            color: color
+          },
           data: arr.map(i => i.change_1h),
           extraData: arr.map(i => i.price)
         });
@@ -156,14 +183,14 @@ export default {
 .banner {
   height: 300px;
   width: 100%;
-  background: @mainBg;
+  background: #001a3a;
   position: relative;
   .container {
     position: relative;
   }
 }
 .banner-canvas {
-    background: @mainBg;
+    background: #001a3a;
   position: absolute;
   z-index: 0;
   .canvas {
@@ -204,7 +231,7 @@ export default {
   position: absolute;
   right: 0;
   .item {
-    color: #fff;
+    color: #81AADD;
     margin-bottom: 31px;
     h2 {
       font-size: 24px;

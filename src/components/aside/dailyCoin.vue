@@ -37,6 +37,9 @@
             </div>
           </div>
         </div>
+        <div class="read-more">
+          <router-link to="/coin/list">查看更多</router-link>
+        </div>
       </div>
     </div>
   </block>
@@ -128,6 +131,9 @@ export default {
     padding-top: 16px;
     padding-bottom: 15px;
     cursor: pointer;
+    &:first-of-type {
+      padding-left: 10px;
+    }
   }
 }
 .row {
@@ -178,6 +184,24 @@ export default {
   }
   &.danger {
     background: #FF4D4F;
+  }
+}
+.read-more {
+  color:rgba(66,100,251,1);
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 50px;
+  margin-top: -50px;
+  // background-color: #FFF;
+  padding-bottom: 11px;
+  z-index: 2;
+  position: relative;
+  background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(255,255,255,0)),color-stop(50%, #fff));
+  background-image: linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, #fff 50%);
+  a {
+    color:rgba(66,100,251,1);
+    text-decoration: none;
   }
 }
 </style>

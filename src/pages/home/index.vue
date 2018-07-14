@@ -5,7 +5,7 @@
     <block title="币市头条">
       <list />
     </block>
-    <sidebar slot="sidebar">
+    <sidebar slot="sidebar" enableFixed>
       <hot-key />
       <hot-news />
       <daily-coin />

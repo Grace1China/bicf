@@ -20,12 +20,17 @@
     <div class="footer">
       <slot name="footer" />
     </div>
+    <back-top></back-top>
   </div>
 </template>
 <script>
+import backTop from './backTop'
 export default {
   props: {
     fullwidth: Boolean
+  },
+  components: {
+    backTop
   },
   mounted() {
     console.log(this.fullwidth)

@@ -98,7 +98,7 @@ export default {
       overflow: hidden;
     }
     .description {
-      margin: 10px 0 20px;
+      margin: 11px 0 32px;
       font-size:14px;
       color:rgba(119,119,119,1);
       line-height:20px;

@@ -16,19 +16,19 @@
               <icon v-if="orderBy === 'name'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
-          <div class="col" @click="setOrder('marketcap')">
+          <div class="col left" @click="setOrder('marketcap')">
             <div class="btn primary">
               市值
               <icon v-if="orderBy === 'marketcap'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
-          <div class="col" @click="setOrder('price')">
+          <div class="col left" @click="setOrder('price')">
             <div class="btn primary">
               价格
               <icon v-if="orderBy === 'price'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
             </div>
           </div>
-          <div class="col" @click="setOrder('volume_24h')">
+          <div class="col left" @click="setOrder('volume_24h')">
             <div class="btn primary">
               成交量(24h)
               <icon v-if="orderBy === 'volume_24h'" :type="orderAsc ? 'sort-asc' : 'sort-desc'" />
@@ -60,13 +60,13 @@
                 </b>
               </div>
             </div>
-            <div class="col">
+            <div class="col left">
               {{item.marketcap | currency}}
             </div>
-            <div class="col">
+            <div class="col left">
               {{item.price | currency}}
             </div>
-            <div class="col">
+            <div class="col left">
               {{item.volume_24h | currency}}
             </div>
             <div class="col" :class="item.change_24h >= 0 ? 'price-up' : 'price-down'">
@@ -208,6 +208,9 @@ export default {
   .col {
     flex: 1;
     text-align: center;
+    &.left {
+      text-align: left;
+    }
     &:first-of-type {
       max-width: 100px;
       // padding-left: 15px;
@@ -256,9 +259,9 @@ export default {
       margin-right: 15px;
       
     }
-    &.left {
-      text-align: left;
-    }
+    // &.left {
+    //   text-align: left;
+    // }
     &:first-of-type {
       background: #F6F6F6;
     }
