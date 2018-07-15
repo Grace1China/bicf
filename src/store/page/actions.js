@@ -27,6 +27,7 @@ export const getNews = ({commit, state}, data) => {
         ]
       }
     })
+    window.dispatchEvent(new Event('resize'))
   })
 }
 

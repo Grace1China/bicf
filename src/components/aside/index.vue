@@ -40,9 +40,15 @@ export default {
         return
       }
       const scrollTop = document.documentElement.scrollTop
+
+      if (scrollTop < this.clientTop) {
+        this.noFreeze()
+        return;
+      }
+
       const containerHeight = this.container.scrollHeight + 50
 
-      console.log(containerHeight)
+      // console.log(containerHeight)
 
       const distence = scrollTop - containerHeight - this.clientTop + window.innerHeight
       // console.log(distence)
@@ -86,8 +92,8 @@ export default {
   destroyed() {
     this.bottom = null
     
-    window.removeEventListener('scroll', this.checkLoad)
-    window.removeEventListener('resize', this.checkLoad)
+    window.removeEventListener('scroll', this.checkFix)
+    window.removeEventListener('resize', this.checkFix)
   }
 }
 </script>

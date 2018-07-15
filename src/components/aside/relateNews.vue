@@ -37,10 +37,10 @@ export default {
 
 <style lang="less" scoped>
 .inner {
-  overflow-y: auto;
-  max-height: 620px;
-  overflow-x: hidden;
-  padding-right: 15px;
+  // overflow-y: auto;
+  // max-height: 620px;
+  // overflow-x: hidden;
+  // padding-right: 15px;
   &::-webkit-scrollbar{
     width: 6px;
     height: 16px;

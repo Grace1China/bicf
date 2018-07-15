@@ -55,6 +55,7 @@ export default {
         limit: 15,
       }).then(() => {
         this.loading = false
+        window.dispatchEvent(new Event('resize'))
       })
     },
   },
