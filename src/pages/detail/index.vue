@@ -1,7 +1,9 @@
 <template>
-  <layout>
+  <layout :fullwidth="loaderror || loading">
     <topbar slot="topbar" />
-    <div class="detail-page">
+    <loaderror v-if="loaderror" />
+    <loading v-else-if="loading" />
+    <div v-else class="detail-page">
       <Content />
       <time-line  />
     </div>
@@ -25,7 +27,8 @@ export default {
   name: "detail",
   data: () => {
     return {
-      loading: true
+      loading: true,
+      loaderror: false
     }
   },
   components: {
@@ -43,7 +46,10 @@ export default {
         this.$store.dispatch('getRelateNews', this.$route.params.id),
         this.$store.dispatch('getRelateObj', this.$route.params.id),
         this.$store.dispatch('getTimeLine', this.$route.params.id),
-      ])
+        // Promise.reject(),
+      ]).catch(() => {
+        this.loaderror = true
+      })
       this.loading = false
     }
   },

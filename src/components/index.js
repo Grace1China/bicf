@@ -7,6 +7,7 @@ import Footer from './footer'
 import Layout from './layout'
 import Icon from './Icon'
 import Loading from './loading'
+import LoadError from './loadError'
 
 Vue.component('sidebar', Aside)
 Vue.component('block', AsideBlock)
@@ -15,3 +16,4 @@ Vue.component('footerBar', Footer)
 Vue.component('layout', Layout)
 Vue.component('icon', Icon)
 Vue.component('loading', Loading)
+Vue.component('loaderror', LoadError)

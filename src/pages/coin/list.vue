@@ -77,6 +77,7 @@
             </div>
           </div>
         </div>
+        <loaderror v-if="loaderror" />
         <loading v-if="loading" />
         <div ref="loadMore"></div>
       </div>
@@ -100,6 +101,7 @@ export default {
       page: 1,
       limit: 100,
       loading: false,
+      loaderror: false,
       cacheList: []
     }
   },
@@ -165,6 +167,9 @@ export default {
         page: this.page++
       }).then(() => {
         this.loading = false
+        // throw new Error('ff')
+      }).catch(() => {
+        this.loaderror = true
       })
     },
     setOrder(name) {

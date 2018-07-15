@@ -2,7 +2,8 @@
   <layout fullwidth>
     <topbar slot="topbar" />
     <div class="coin-detail">
-      <loading v-if="loading" />
+      <loaderror v-if="loaderror" />
+      <loading v-else-if="loading" />
       <div v-else class="inner">
         <h1 class="title">
           <img :src="basic.image">
@@ -116,6 +117,7 @@ const series = {
 export default {
   data() {
     return {
+      loaderror: false,
       loading: true,
       $chart: null,
       colors: ['#02B000', '#4264FB', "#F000BC", "#FFC900", "#7EC5FF"],
@@ -292,9 +294,12 @@ export default {
     async loadData() {
       const cid = this.$route.params.id
       await Promise.all([
+        // Promise.reject(),
         this.loadDetail(),
         this.$store.dispatch('getCoinNews', cid),
-      ])
+      ]).catch(() => {
+        this.loaderror = true
+      })
       this.loading = false
     },
     changeTimeType(name) {

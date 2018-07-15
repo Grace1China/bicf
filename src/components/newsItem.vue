@@ -6,7 +6,7 @@
       </div>
       <div class="info">
         <h1 v-if="title">{{title}}</h1>
-        <p v-if="desc || forceDesc" class="description" v-html="desc"></p>
+        <p v-if="desc || forceDesc" class="description" :style="{marginBottom: location ? '' : '0px'}" v-html="desc"></p>
         <div class="meta">
           <div class="meta-item" v-if="location">
             <icon type="location" />

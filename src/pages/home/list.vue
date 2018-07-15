@@ -14,7 +14,8 @@
         :spread="item.propagation"
         :tags="item.keywords"
       />
-      <loading v-if="loading" />
+      <loaderror v-if="loaderror" />
+      <loading v-else-if="loading" />
       <div ref="loadMore"></div>
     </div>
   </div>
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       loading: false,
+      loaderror: false,
       page: 1
     }
   },
@@ -56,6 +58,8 @@ export default {
       }).then(() => {
         this.loading = false
         window.dispatchEvent(new Event('resize'))
+      }).catch(() => {
+        this.loaderror = true
       })
     },
   },
