@@ -3,8 +3,8 @@
     <div ref="container" class="aside-container" :class="isFreeze ? 'freeze' : ''" :style="style">
       <div class="aside-blocks">
         <slot />
-        <div ref="bottom"></div>
       </div>
+      <div ref="bottom"></div>
     </div>
   </div>
 </template>
@@ -40,9 +40,12 @@ export default {
         return
       }
       const scrollTop = document.documentElement.scrollTop
-      const containerHeight = this.container.offsetHeight + 50
+      const containerHeight = this.container.scrollHeight + 50
+
+      console.log(containerHeight)
 
       const distence = scrollTop - containerHeight - this.clientTop + window.innerHeight
+      // console.log(distence)
 
       // const { top } = this.bottom && this.bottom.getBoundingClientRect && this.bottom.getBoundingClientRect()
       // console.log( top - window.innerHeight)
@@ -77,12 +80,14 @@ export default {
     this.clientTop = top
 
     window.addEventListener('scroll', this.checkFix)
+    window.addEventListener('resize', this.checkFix)
     window.dispatchEvent(new Event('scroll'))
   },
   destroyed() {
     this.bottom = null
     
     window.removeEventListener('scroll', this.checkLoad)
+    window.removeEventListener('resize', this.checkLoad)
   }
 }
 </script>
@@ -90,6 +95,9 @@ export default {
 <style lang="less" scoped>
   .aside :global(.block) {
     margin-bottom: 50px;
+    &:last-of-type {
+      margin-bottom: 0px;
+    }
   }
   .freeze {
     position: fixed;

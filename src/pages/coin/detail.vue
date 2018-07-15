@@ -37,6 +37,7 @@
           </div>
           <div class="clearfix"></div>
         </div>
+        <div class="splitLine" />
         <div class="coin-chart">
           <div class="actions">
             <button 
@@ -332,6 +333,7 @@ export default {
   .title {
     font-size: 30px;
     color: #222222;
+    margin-top: 20px;
     margin-bottom: 50px;
     img{
       height: 40px;
@@ -349,7 +351,7 @@ export default {
   }
 }
 .number {
-  margin-bottom: 100px;
+  
   .non-item {
     border-radius: 0 0 5px 5px;
     // width: 130px;
@@ -367,6 +369,12 @@ export default {
       display: block;
     }
   }
+}
+.splitLine {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  height: 1px;
+  background: #E9E9E9;
 }
 .chart-detail {
   min-height: 350px;

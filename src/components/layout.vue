@@ -7,7 +7,7 @@
       <div class="banner">
         <slot name="banner" />
       </div>
-      <div class="container">
+      <div class="container" ref="container">
         <div class="content" :class="{ fullwidth }">
           <slot />
         </div>
@@ -20,12 +20,17 @@
     <div class="footer">
       <slot name="footer" />
     </div>
-    <back-top></back-top>
+    <back-top :right="right"></back-top>
   </div>
 </template>
 <script>
 import backTop from './backTop'
 export default {
+  data() {
+    return {
+      right: 0
+    }
+  },
   props: {
     fullwidth: Boolean
   },
@@ -33,7 +38,9 @@ export default {
     backTop
   },
   mounted() {
-    console.log(this.fullwidth)
+    this.$refs.container
+    const { left } = this.$refs.container && this.$refs.container.getBoundingClientRect && this.$refs.container.getBoundingClientRect()
+    this.right = left
   }
 }
 </script>
