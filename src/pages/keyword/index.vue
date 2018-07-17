@@ -37,6 +37,7 @@ export default {
   data(){
     return {
       loading: false,
+      maxPage: 99,
       page: 1
     }
   },
@@ -72,6 +73,7 @@ export default {
   },
   methods: {
     resetData() {
+      this.maxPage = 99
       this.$store.commit('setKeyword', {
         id: this.$route.params.keyword,
         list: []
@@ -83,17 +85,25 @@ export default {
       // console.log( top - window.innerHeight)
       const distence = top - window.innerHeight
       if(distence < 1000) {
-        this.loading = true
+        // this.loading = true
         this.load()
       }
     },
     load(id = this.$route.params.keyword) {
+      if(this.loading) {
+        return
+      }
+      if(this.page >= this.maxPage) {
+        this.loading = false
+        return false
+      }
       this.loading = true
       this.$store.dispatch('keywordNews', {
         id: id,
         page: this.page++,
         limit: 15,
-      }).then(() => {
+      }).then(res => {
+        this.maxPage = res.last_page
         this.loading = false
       })
     },

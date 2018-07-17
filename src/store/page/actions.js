@@ -28,6 +28,7 @@ export const getNews = ({commit, state}, data) => {
       }
     })
     window.dispatchEvent(new Event('resize'))
+    return res.data.data
   })
 }
 
@@ -69,6 +70,7 @@ export const searchNews = ({commit, state}, data) => {
         ...res.data.data.data
       ]
     })
+    return res.data.data
   })
 }
 
@@ -83,6 +85,7 @@ export const keywordNews = ({commit, state}, {id, ...data}) => {
         ...res.data.data.data
       ]
     })
+    return res.data.data
   })
 }
 
@@ -96,6 +99,7 @@ export const getCoins = ({commit, state}, data) => {
         ...res.data.data.data
       ]
     })
+    return res.data.data
   })
 }
 

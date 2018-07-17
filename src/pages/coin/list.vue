@@ -161,6 +161,9 @@ export default {
   },
   methods: {
     load() {
+      if(this.loading) {
+        return
+      }
       this.loading = true
       this.$store.dispatch('getCoins', {
         limit: this.limit,
@@ -170,6 +173,7 @@ export default {
         // throw new Error('ff')
       }).catch(() => {
         this.loaderror = true
+        this.loading = false
       })
     },
     setOrder(name) {
@@ -186,7 +190,7 @@ export default {
       // console.log( top - window.innerHeight)
       const distence = top - window.innerHeight
       if(distence < 1000) {
-        this.loading = true
+        // this.loading = true
         this.load()
       }
     },

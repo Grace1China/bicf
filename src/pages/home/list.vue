@@ -47,11 +47,15 @@ export default {
       // console.log( top - window.innerHeight)
       const distence = top - window.innerHeight
       if(distence < 1000) {
-        this.loading = true
+        // this.loading = true
         this.loadData()
       }
     },
     loadData() {
+      if(this.loading) {
+        return
+      }
+      this.loading = true
       this.$store.dispatch('getNews', {
         page: this.page++,
         limit: 15,
@@ -60,6 +64,7 @@ export default {
         window.dispatchEvent(new Event('resize'))
       }).catch(() => {
         this.loaderror = true
+        this.loading = false
       })
     },
   },
