@@ -30,7 +30,9 @@ export default {
     }, {
       link: '/',
       text: '反馈意见',
-    }]
+    }],
+    res: [{nomore: '呦呵，数据被您加载完了！',
+    }],
   },
   mutations: {
     setNavbar(state, index) {

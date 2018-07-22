@@ -87,7 +87,7 @@ export default {
     position: relative;
     input {
       background: rgba(0,0,0,0);
-      border: 1px solid #fff;
+      border: 1px solid #d4d4d4;
       width: 340px - 54px;
       height: 100%;
       line-height: 50px;
@@ -98,6 +98,13 @@ export default {
         color: #fff;
       }
     }
+
+    input:focus {
+      outline-offset: 0px;
+      outline: -webkit-focus-ring-color auto 0px;
+      border: 1px solid #fff;
+    }
+
     :global(.iconfont) {
       position: absolute;
       top: 0;

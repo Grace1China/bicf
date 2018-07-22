@@ -17,7 +17,7 @@
             <span>交易量</span>
           </div>
           <div class="col" @click="setOrder('change_24h')">
-            涨跌幅
+             <div class="btnx">涨跌幅</div>
           </div>
         </div>
         <div class="tbody">
@@ -124,15 +124,20 @@ export default {
   }
 }
 .theader {
-  background:rgba(241,242,246,1);
+  /*background:rgba(241,242,246,1);*/
+  background: #4264FB;
   border-radius:10px 10px 0px 0px;
   padding-right: 5px;
   .col {
     padding-top: 16px;
     padding-bottom: 15px;
+    color:#fff;
     cursor: pointer;
     &:first-of-type {
       padding-left: 10px;
+    }
+    span{
+      color:#fff;
     }
   }
 }
@@ -153,7 +158,7 @@ export default {
 }
 .tbody {
   max-height: 600px;
-  overflow-y: auto;
+  overflow-y: overlay;
   margin-right: 5px;
   &::-webkit-scrollbar{
     width: 6px;

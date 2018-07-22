@@ -10,7 +10,7 @@
           :main="item.main"
           :list="item.list"
         />
-        <loading v-if="loading" />
+        <loading :hasMore="loading"  />
         <div ref="loadMore"></div>
       </div>
     </div>
@@ -79,7 +79,7 @@ export default {
       // console.log( top - window.innerHeight)
       const distence = top - window.innerHeight
       if(distence < 1000) {
-        this.loading = true
+        //this.loading = true
         this.load()
       }
     },

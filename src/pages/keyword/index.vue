@@ -1,4 +1,4 @@
-<template>
+  <template>
   <layout>
     <topbar slot="topbar" />
     <sidebar slot="sidebar">
@@ -13,7 +13,7 @@
           :main="item.main"
           :list="item.list"
         />
-        <loading v-if="loading" />
+        <loading :hasMore="loading" />
         <div ref="loadMore"></div>
       </div>
     </div>

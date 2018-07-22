@@ -1,16 +1,44 @@
 <template>
   <div class="loading-container">
-		<div class="box">
+		<div  v-if="hasMore===true" class="box">
 			<div class="loader2"></div>
+		</div>
+		<div  v-else class="boxmsg">
+			{{res[0].nomore}}
 		</div>
 </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+export default {
+  name: 'loading',
+  props: {
+    hasMore: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    ...mapState({
+      res: state => state.common.res
+    })
+  }
+
+}
+</script>
 <style lang="less" scoped>
 .loading-container{
 	text-align: center;
 	overflow: hidden;
 }
+.boxmsg{
+	display: inline-block;
+	height: 200px;
+	width: 33.3%;
+	line-height: 1;
+	padding-top: 10%;
 
+}
 .box{
 	display: inline-block;
 	height: 200px;
